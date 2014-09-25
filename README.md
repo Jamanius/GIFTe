@@ -41,9 +41,10 @@ __Frontend__ : OOJS, ajax, knockout.js, jQuery UI
 * 10.30 - 7pm Saturday/Sunday 
 
 ## Project Management 
-* Waffle 
+* Trello
 
 ## Coding Strategies 
 * After each MVP component, write test to make sure it doesn’t get broken by further development (Jasmine + RSpec)
 * List of awesome gems to follow
 
+ 
