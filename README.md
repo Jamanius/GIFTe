@@ -6,18 +6,18 @@ Promoting the GiftEconomy
 > “You make a living from what you get, 
 > but you make a life from what you give”
 
-*GiftE offers an alternative to monetary exchange where goods and services are gifted to people in your local community without contemplation of reciprocity.  Its like a trademe for free stuff, shared between people in your neighborhod.*  
+*GiftE offers an alternative to monetary exchange where goods and services are gifted to people in your local community without contemplation of reciprocity.  It's like a TradeMe for free stuff, shared between people in your neighbourhood.*  
 
 ---------------
 
 
 -----------------
 
-__Team__ : Linden, Jaime, Jaz and Jessica 
+__Team__ : Linden Kirkby, Jaime Campbell, Jasmin Mayfield and Jessica Kennair. 
 
 __Backend__ : Ruby on Rails + some pretty choice gems.
 
-__Frontend__ : OOJS, ajax, knockout.js, jQuery UI
+__Frontend__ : OOJavaSript, Ajax, Knockout.js, jQuery/UI.
 
  
 
@@ -34,7 +34,7 @@ __Frontend__ : OOJS, ajax, knockout.js, jQuery UI
 * Buddy code 
 * Morning standup 
 * Minimum of 3 check-ins per day
-* Code walk through 6.30
+* Code walk through at 6.30pm
 
 ## Working hours
 * 9am - 7pm weekdays 
