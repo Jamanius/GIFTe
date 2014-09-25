@@ -25,6 +25,10 @@ gem 'spring',        group: :development
 gem 'devise' 
 #Carrierwave gem for image uploading
 gem 'carrierwave'
+# Handlebars gem for javascript templates
+gem 'handlebars-rails', '~> 0.4.2'
+# Knockout JS framework gem
+gem 'knockoutjs-rails', '~> 3.2.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
