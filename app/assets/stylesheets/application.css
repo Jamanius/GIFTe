@@ -12,9 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require_directory ./graphista
  */
 
 
-body {
-  padding-top: 70px;
- }
