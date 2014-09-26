@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925054342) do
+ActiveRecord::Schema.define(version: 20140926044745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,18 @@ ActiveRecord::Schema.define(version: 20140925054342) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
+
+  create_table "requests", force: true do |t|
+    t.integer  "user_id_id"
+    t.integer  "gift_id_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "requests", ["gift_id_id"], name: "index_requests_on_gift_id_id", using: :btree
+  add_index "requests", ["user_id_id"], name: "index_requests_on_user_id_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
