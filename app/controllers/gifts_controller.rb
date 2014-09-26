@@ -6,7 +6,7 @@ class GiftsController < ApplicationController
   def index
     @gifts = Gift.all
     @user = User.new
-    render layout: "landing"
+    # render layout: "landing"
   end
 
   # GET /gifts/1
