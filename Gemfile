@@ -25,6 +25,8 @@ gem 'spring',        group: :development
 gem 'devise' 
 #Carrierwave gem for image uploading
 gem 'carrierwave'
+#Minimagick gem to be used with Carrierwave gem
+gem 'mini_magick'
 # Handlebars gem for javascript templates
 gem 'handlebars-rails', '~> 0.4.2'
 # Knockout JS framework gem
