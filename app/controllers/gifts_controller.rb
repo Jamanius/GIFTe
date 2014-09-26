@@ -7,12 +7,21 @@ class GiftsController < ApplicationController
     @gifts = Gift.all
     @gift = Gift.new
     @user = User.new
-    render layout: "landing"
+    # respond_to // still see html page. User goes to /gifts, renders gifts view, then JS will ask server for gifts json 
+    respond_to do |format|
+      format.html 
+      format.json { render json: @gifts }
+    end    
   end
 
   # GET /gifts/1
   # GET /gifts/1.json
   def show
+    @gift = Gift.find(params[:id])
+    respond_to do |format|
+      format.html 
+      format.json { render json: @gift }
+    end 
   end
 
   # GET /gifts/new
