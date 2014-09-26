@@ -5,6 +5,7 @@ class CreateGifts < ActiveRecord::Migration
       t.text :description
       t.string :type
       t.text :comments
+      t.string :image
   
 
       t.timestamps
