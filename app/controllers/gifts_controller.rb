@@ -5,6 +5,8 @@ class GiftsController < ApplicationController
   # GET /gifts.json
   def index
     @gifts = Gift.all
+    @user = User.new
+    render layout: "landing"
   end
 
   # GET /gifts/1
