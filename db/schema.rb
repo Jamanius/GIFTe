@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140926044745) do
     t.text     "description"
     t.string   "type"
     t.text     "comments"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
