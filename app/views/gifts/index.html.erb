@@ -3,6 +3,14 @@
 <h2>Gifts List</h2>
 
 
+<% @gifts.each do | gift| %>
+      <div>
+        <a href="/gifts/<%= gift.id %>">
+          <%= gift.title %>
+        </a>
+      </div>
+  <% end %>
+
 
 <h1> Browse gifts </h1>
 
