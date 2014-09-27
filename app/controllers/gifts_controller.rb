@@ -4,7 +4,7 @@ class GiftsController < ApplicationController
   # GET /gifts
   # GET /gifts.json
   def index
-    @gifts = Gift.all
+    @gifts = Gift.all 
     @gift = Gift.new
     @user = User.new
 
