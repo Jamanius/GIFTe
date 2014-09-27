@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboard/listed'
+
   devise_for :users
   resources :gifts
   root 'landing#index'

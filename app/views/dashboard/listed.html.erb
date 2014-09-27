@@ -1,0 +1,16 @@
+<h1>Dashboard#index</h1>
+<p>Find me in app/views/dashboard/index.html.erb</p>
+
+<ul class="nav nav-pills">
+  <li class="active"><%= link_to "My Listings", dashboard_listed_path %></li>
+  <li><a href="#">My requests</a></li>
+  <li><a href="#">Messages</a></li>
+</ul>
+
+<% current_user.gifts.each do | gift| %>
+      <div>
+        <a href="/gifts/<%= gift.id %>">
+          <%= gift.title %>
+        </a>
+      </div>
+  <% end %>
