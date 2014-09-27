@@ -11,25 +11,33 @@
     </div>
   <% end %>
 
+  <div class="row">
+    <div class="col-xs-5">
+      
+      <div class="field, form-group">
+        <%= f.label :title %><br>
+        <%= f.text_field :title, class: "form-control"  %>
+      </div>
 
-  <div class="field, form-group">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, class: "form-control"  %>
-  </div>
-
-  <div class="field, form-group">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :gifts_type %><br>
-    <%= f.text_field :gifts_type %>
-  </div>
-  <div class="field">
-    <%= f.label :comments %><br>
-    <%= f.text_area :comments %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+      <div class="field, form-group">
+        <%= f.label :description %><br>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+      
+      <div class="field form-group">
+        <%= f.label :gifts_type %><br>
+        <%= f.text_field :gifts_type, placeholder: "Is it Eadible, Wearable or Useable?", class: "form-control" %>
+      </div>
+      
+      <div class="field form-group">
+        <%= f.label :comments %><br>
+        <%= f.text_area :comments, placeholder: "Additonal information",class: "form-control" %>
+      </div>
+      
+      <div class="actions">
+        <%= f.submit class: 'btn btn-info'%>
+      </div>
+      
+    </div>
   </div>
 <% end %>
