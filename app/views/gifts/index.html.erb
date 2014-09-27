@@ -3,14 +3,18 @@
 
 <div class="container-inner">
   <% @gifts.each do | gift| %>
-    <div>
+    <div class="gift">
       <a href="/gifts/<%= gift.id %>">
         <strong><%= gift.title %></strong>
         <em><%= gift.description %></em><br>
         </a>
         <div>user name |  <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %></div>   
-        <hr>
-      
+        <% if gift.user == current_user %>
+        <span class="admin">
+          <%= link_to "Edit", edit_gift_path(gift) %> | 
+        </span>
+        <% end %>
+        <hr>   
     </div>
   <% end %>
 </div>

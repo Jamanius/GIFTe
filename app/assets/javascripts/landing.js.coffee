@@ -2,9 +2,3 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
-  $('.status').hover (event) ->
-    #console.log("hover triggered")
-    $(this).toggleClass("hover");
-
-    $(".welcome-notice").hide().show("slow");

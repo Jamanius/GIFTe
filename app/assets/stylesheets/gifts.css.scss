@@ -24,3 +24,22 @@ body {
   margin: 18px 0;
 }
 
+/////////////
+
+
+
+.gift.hover {
+  background: #A0343E;
+}
+
+.status.hover {
+  background: #FFFFFf;
+}
+
+.gift .admin {
+  display: none;
+}
+
+.gift.hover .admin {
+  display: inline;
+}
