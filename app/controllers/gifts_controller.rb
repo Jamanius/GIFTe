@@ -46,7 +46,7 @@ class GiftsController < ApplicationController
 
     respond_to do |format|
       if @gift.save
-        format.html { redirect_to @gift, notice: 'Gift was successfully created.' }
+        format.html { redirect_to dashboard_listed_path, notice: 'Gift was successfully created.' }
         format.json { render :show, status: :created, location: @gift }
       else
         format.html { render :new }
