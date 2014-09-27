@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'dashboard/listed'
+  get 'dashboard/requested'
 
   devise_for :users
   resources :gifts
