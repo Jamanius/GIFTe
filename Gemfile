@@ -23,9 +23,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 #Authorisation Gem 
 gem 'devise' 
-#Carrierwave gem for image uploading
-gem 'carrierwave'
-gem 'mini_magick'
 # Handlebars gem for javascript templates
 gem 'handlebars-rails', '~> 0.4.2'
 # Knockout JS framework gem
