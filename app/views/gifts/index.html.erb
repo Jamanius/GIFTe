@@ -8,7 +8,8 @@
         <strong><%= gift.title %></strong>
         <em><%= gift.description %></em><br>
         </a>
-        <div>user name |  <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %></div>   
+
+        <div>user name <%= gift.user_id %> |  <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %></div>   
         <% if gift.user == current_user %>
         <span class="admin">
           <%= link_to "Edit", edit_gift_path(gift) %> | 
