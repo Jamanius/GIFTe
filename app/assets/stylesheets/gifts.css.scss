@@ -24,8 +24,12 @@ body {
   margin: 18px 0;
 }
 
-/////////////
-
+// target element with class status and hover.
+// Class admin displayed inline (meaning that it should actually be displayed)
+// by default, no hover class on gift 
+// use JS to add hover to gift. 
+// as soon as we add hover class to gift, it will ooverride above rule 
+// now making the display inline (instead of display none)
 
 
 .gift.hover {
