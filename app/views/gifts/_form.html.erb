@@ -33,11 +33,15 @@
         <%= f.label :comments %><br>
         <%= f.text_area :comments, placeholder: "Additonal information",class: "form-control" %>
       </div>
+
+      <div class="field">
+        <%= f.label :image %><br>
+        <%= f.text_area :image %>
+      </div>
       
       <div class="actions">
         <%= f.submit class: 'btn btn-info'%>
       </div>
-      
     </div>
   </div>
 <% end %>

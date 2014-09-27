@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(version: 20140927023745) do
     t.string   "title"
     t.text     "description"
     t.text     "comments"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
-    t.string   "gifts_type"
     t.integer  "user_id"
+    t.string   "gifts_type"
     t.string   "location"
   end
 
