@@ -3,7 +3,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <% if current_user %>
-            <p class="navbar-text navbar-right">Welcome <%= link_to current_user.first_name, edit_user_registration_path %></p>
+            <p class="navbar-text navbar-right">Welcome <%= link_to current_user.first_name, dashboard_listed_path %></p>
             <li>
               <%= link_to "GIVE", new_gift_path %>
             </li>
