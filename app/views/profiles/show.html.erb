@@ -1,2 +1,13 @@
 <h1><%= @user.profile_name%></h1>
 <p>Find me in app/views/profiles/show.html.erb</p>
+
+<% if @gifts %>
+  <% @gifts.each do |gift| %>
+    <div class="well">
+      <%= gift.title %><br>
+      <em><%= gift.description %></em>
+      <hr />
+      <%= link_to time_ago_in_words(gift.created_at), gift_path(gift) %> ago
+    </div>
+  <% end %>
+<% end %>
