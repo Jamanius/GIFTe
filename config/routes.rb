@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  get 'profiles/show'
+
   get 'dashboard/listed'
   get 'dashboard/requested'
 
