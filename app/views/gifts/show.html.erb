@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<h1> "Thank you, wonderful human"</h1>
 <p>
+
   <strong>Title:</strong>
   <%= @gift.title %>
 </p>
@@ -20,8 +21,9 @@
   <%= @gift.comments %>
 </p>
 
-<img src="<%= @gift.image %>" />
+<img src="<%= @gift.image %>" >
 
 
 <%= link_to 'Edit', edit_gift_path(@gift) %> |
 <%= link_to 'Back', gifts_path %>
+
