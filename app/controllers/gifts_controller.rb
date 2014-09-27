@@ -11,7 +11,7 @@ class GiftsController < ApplicationController
     # respond_to // still see html page. User goes to /gifts, renders gifts view, then JS will ask server for gifts json 
     respond_to do |format|
       format.html 
-      format.json { render json: @gifts }
+      format.json { render json: @gifts}
     end    
 
   end

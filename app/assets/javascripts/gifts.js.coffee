@@ -5,4 +5,5 @@
 
 $ ->
   $('.gift').hover (event) ->
+    console.log("hover triggered")
     $(this).toggleClass("hover")
