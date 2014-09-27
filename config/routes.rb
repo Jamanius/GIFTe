@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'user/index'
+
   get 'dashboard/listed'
   get 'dashboard/requested'
 
