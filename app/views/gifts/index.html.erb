@@ -1,14 +1,16 @@
-<div class="page-header">
+<h1>Browse gifts</h1>
+<br>
 
-<h2> Browse gifts </h2>
-
-<% @gifts.each do | gift| %>
-      <div>
-        <a href="/gifts/<%= gift.id %>">
-          <%= gift.title %>
+<div class="container-inner">
+  <% @gifts.each do | gift| %>
+    <div>
+      <a href="/gifts/<%= gift.id %>">
+        <strong><%= gift.title %></strong>
+        <em><%= gift.description %></em><br>
         </a>
-      </div>
+        <div>user name |  <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %></div>   
+        <hr>
+      
+    </div>
   <% end %>
-
 </div>
-

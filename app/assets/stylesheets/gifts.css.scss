@@ -7,19 +7,18 @@ body {
 }
 
 
-#dashboard-inner {
+.container-inner {
   background: white;
   padding: 20px 10px;
   
 }
 
-#dashboard-inner p{
+.container-inner p {
   font-size: 16px;
 }
 
-#dashboard-inner hr{
+.container-inner hr{
   border-color: #6D6D6D;
   border-style: dotted;
-  
   margin: 18px 0;
 }

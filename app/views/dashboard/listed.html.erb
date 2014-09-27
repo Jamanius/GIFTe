@@ -8,13 +8,13 @@
 </ul>
 <br>
 
-<div id="dashboard-inner">
+<div class="container-inner">
 
 <% current_user.gifts.each do | gift| %>
       <div>
         <a href="/gifts/<%= gift.id %>">
-          <%= gift.title %>
-          <%= gift.description %><br>
+          <strong><%= gift.title %></strong>
+          <em><%= gift.description %></em><br>
           <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %>   
           <hr>
         </a>
