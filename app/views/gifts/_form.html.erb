@@ -1,4 +1,4 @@
-<%= form_for(@gift), :html => {:multipart => true} do |f| %>
+<%= form_for(@gift) do |f| %>
   <% if @gift.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@gift.errors.count, "error") %> prohibited this gift from being saved:</h2>
@@ -27,10 +27,6 @@
   <div class="field">
     <%= f.label :comments %><br>
     <%= f.text_area :comments %>
-  </div>
-  <div class="field">
-    <%= f.file_field :image %>
-    <%= f.hidden_field :image_cache %>
   </div>
   <div class="actions">
     <%= f.submit %>

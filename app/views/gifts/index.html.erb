@@ -5,7 +5,6 @@
 <% @gifts.each do | gift| %>
       <div>
         <a href="/gifts/<%= gift.id %>">
-          <%= image_tag gift.image.thumb.url %> 
           <%= gift.title %>
         </a>
       </div>
