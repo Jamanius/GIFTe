@@ -5,28 +5,42 @@ class GiftsController < ApplicationController
   # GET /gifts.json
   def index
     @gifts = Gift.all
+    @gift = Gift.new
     @user = User.new
-    render layout: "landing"
+    # respond_to // still see html page. User goes to /gifts, renders gifts view, then JS will ask server for gifts json 
+    respond_to do |format|
+      format.html 
+      format.json { render json: @gifts }
+    end    
   end
 
   # GET /gifts/1
   # GET /gifts/1.json
   def show
+    @gift = Gift.find(params[:id])
+    respond_to do |format|
+      format.html 
+      format.json { render json: @gift }
+    end 
   end
 
   # GET /gifts/new
   def new
+    return redirect_to new_user_session_path unless current_user
     @gift = Gift.new
   end
 
   # GET /gifts/1/edit
   def edit
+    return redirect_to new_user_session_path unless current_user == @gift.user 
   end
 
   # POST /gifts
   # POST /gifts.json
   def create
+    return redirect_to new_user_session_path unless current_user
     @gift = Gift.new(gift_params)
+    @gift.user = current_user 
 
     respond_to do |format|
       if @gift.save
@@ -42,6 +56,7 @@ class GiftsController < ApplicationController
   # PATCH/PUT /gifts/1
   # PATCH/PUT /gifts/1.json
   def update
+    return redirect_to new_user_session_path unless current_user == @gift.user 
     respond_to do |format|
       if @gift.update(gift_params)
         format.html { redirect_to @gift, notice: 'Gift was successfully updated.' }
