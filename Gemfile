@@ -30,6 +30,8 @@ gem 'handlebars-rails', '~> 0.4.2'
 # Knockout JS framework gem
 gem 'knockoutjs-rails', '~> 3.2.0'
 
+gem 'mini_magick'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
