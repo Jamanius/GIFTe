@@ -1,18 +1,29 @@
-<div class="page-header">
+<h1>Browse gifts</h1>
+<br>
 
-<h2> Browse gifts </h2>
+<div class="container-inner">
+  <% @gifts.each do | gift| %>
+    <div class="gift">
+      <a href="/gifts/<%= gift.id %>">
+        <strong><%= gift.title %></strong>
+        <em><%= gift.description %></em><br>
+      </a>
+      <div> user name <%= gift.user_id %> |  <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %>
+      <a class="btn btn-inf pull-right" href="#" role="button">Enquire »</a>
+      </div>   
 
-<% @gifts.each do | gift| %>
-      <div>
-        <a href="/gifts/<%= gift.id %>">
-          <%= gift.title %>
-        </a>
-      </div>
+      <% if gift.user == current_user %>
+        <span class="admin">
+          <%= link_to "Edit", edit_gift_path(gift) %> | 
+        </span>
+      <% end %>
+      <hr>   
+    </div>    
   <% end %>
-
-
-
-
-
 </div>
 
+
+  
+          <!-- <div class="btn pull-right">
+            <div class: 'btn btn-info'>
+          </div>   -->

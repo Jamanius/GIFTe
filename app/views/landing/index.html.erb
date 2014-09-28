@@ -21,6 +21,11 @@
         </div>
 
         <div class="form-group">
+          <%= f.label :profile_name, class: "sr-only"  %>
+          <%= f.text_field :profile_name, placeholder: "profile name", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
           <%= f.label :email, class: "sr-only"%>
           <%= f.email_field :email, autofocus: true, placeholder: "email", class: "form-control" %>
         </div>

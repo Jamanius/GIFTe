@@ -4,14 +4,14 @@ class GiftsController < ApplicationController
   # GET /gifts
   # GET /gifts.json
   def index
-    @gifts = Gift.all
+    @gifts = Gift.all 
     @gift = Gift.new
     @user = User.new
 
     # respond_to // still see html page. User goes to /gifts, renders gifts view, then JS will ask server for gifts json 
     respond_to do |format|
       format.html 
-      format.json { render json: @gifts }
+      format.json { render json: @gifts}
     end    
 
   end
@@ -46,7 +46,7 @@ class GiftsController < ApplicationController
 
     respond_to do |format|
       if @gift.save
-        format.html { redirect_to @gift, notice: 'Gift was successfully created.' }
+        format.html { redirect_to dashboard_listed_path, notice: 'Gift was successfully created.' }
         format.json { render :show, status: :created, location: @gift }
       else
         format.html { render :new }

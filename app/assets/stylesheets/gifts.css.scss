@@ -6,3 +6,43 @@ body {
   padding-top: 70px;
 }
 
+
+.container-inner {
+  background: white;
+  padding: 20px 10px;
+  border-radius:10px;
+
+}
+
+.container-inner p {
+  font-size: 16px;
+}
+
+.container-inner hr{
+  border-color: #6D6D6D;
+  border-style: dotted;
+  margin: 18px 0;
+}
+
+// target element with class status and hover.
+// Class admin displayed inline (meaning that it should actually be displayed)
+// by default, no hover class on gift 
+// use JS to add hover to gift. 
+// as soon as we add hover class to gift, it will ooverride above rule 
+// now making the display inline (instead of display none)
+
+.gift {
+  margin: 20px;
+}
+.gift.hover {
+  background: #A0343E;
+}
+
+
+.gift .admin {
+  display: none;
+}
+
+.gift.hover .admin {
+  display: inline;
+}
