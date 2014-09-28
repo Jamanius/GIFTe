@@ -1,6 +1,10 @@
-<h1>Editing gift</h1>
+<h1>Edit gift</h1>
+<div class="row">
+  <div class="col-xs-6 ">
 
-<%= render 'form' %>
+    <%= render 'form' %>
+    <%= link_to 'Show', @gift %> |
+    <%= link_to 'Back', gifts_path %>
 
-<%= link_to 'Show', @gift %> |
-<%= link_to 'Back', gifts_path %>
+  </div>
+</div>

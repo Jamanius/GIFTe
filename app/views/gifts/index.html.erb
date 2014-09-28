@@ -6,9 +6,10 @@
     <div class="gift">
       <a href="/gifts/<%= gift.id %>">
         <strong><%= gift.title %></strong>
-        <em><%= gift.description %></em><br>
       </a>
-      <div> user name <%= gift.user_id %> |  <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %>
+      <span>  ---</span><em><%= gift.description %></em><br>
+      
+      <div><%= link_to gift.user.profile_name, profile_path(gift.user) %> |  <%= time_ago_in_words(gift.created_at) + " ago" %>
       <a class="btn btn-inf pull-right" href="#" role="button">Enquire »</a>
       </div>   
 
