@@ -31,7 +31,9 @@ body {
 // as soon as we add hover class to gift, it will ooverride above rule 
 // now making the display inline (instead of display none)
 
-
+.gift {
+  margin: 20px;
+}
 .gift.hover {
   background: #A0343E;
 }

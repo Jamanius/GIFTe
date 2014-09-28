@@ -9,15 +9,16 @@
         <em><%= gift.description %></em><br>
       </a>
       <div> user name <%= gift.user_id %> |  <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %>
+      <a class="btn btn-inf pull-right" href="#" role="button">Enquire »</a>
       </div>   
-      <a class="btn btn-info pull-right" href="#" role="button">Enquire »</a>
+
       <% if gift.user == current_user %>
         <span class="admin">
           <%= link_to "Edit", edit_gift_path(gift) %> | 
         </span>
       <% end %>
       <hr>   
-    </div>            
+    </div>    
   <% end %>
 </div>
 
