@@ -1,0 +1,46 @@
+<h1>My Dashboard</h1>
+
+  <div class="text-center">
+    <!-- tabs -->
+    <ul class="nav nav-pills center-pills" role="tablist">
+      <li class="active"><a href="#my-gifts" role="tab" data-toggle="tab">Stuff I'm giving away</a></li>
+      <li><a href="#my-requests" role="tab" data-toggle="tab">Stuff I've asked for</a></li>
+    </ul>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <div class="tab-pane active" id="my-gifts">
+      <h2>Stuff I'm giving away</h2>
+      <div class="container-inner">
+        <% current_user.gifts.each do | gift| %>
+          <div>
+            <a href="/gifts/<%= gift.id %>">
+              <strong><%= gift.title %></strong>
+              <em><%= gift.description %></em><br>
+              <%= link_to time_ago_in_words(gift.created_at) + " ago" , gift %>
+              <hr>
+            </a>
+          </div>
+        <% end %>
+      </div> 
+
+    </div>
+
+    <div class="tab-pane" id="my-requests">
+      
+      <h2>Stuff I've asked for</h2>
+      <div class="container-inner">
+        <% current_user.requests.each do | request | %>
+          <div>
+            <a href="/gifts/<%= request.gift.id %>">
+              <strong><%= request.gift.title %></strong>
+              <em><%= request.gift.description %></em><br>
+              <span><%= time_ago_in_words(request.gift.created_at) + " ago" %></span>
+              <hr>
+            </a>
+          </div>
+        <% end %>      
+      </div>
+    </div>
