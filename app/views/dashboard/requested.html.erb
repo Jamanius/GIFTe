@@ -10,7 +10,37 @@
 <br>
 <div class="container-inner">
 
-<p> item </p>
-<p> item </p>
-<p> item </p>
+  <!-- tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#my-gifts" role="tab" data-toggle="tab">My Gifts</a></li>
+    <li><a href="#my-requests" role="tab" data-toggle="tab">My Requests</a></li>
+    <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="my-gifts">
+      <h2>My Gifts</h2>
+      <% current_user.gifts.each do | gift| %>
+        <div>
+          <a href="/gifts/<%= gift.id %>/edit">
+            <%= gift.title %>
+          </a>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="tab-pane" id="my-requests">
+      
+      <h2>My Requests</h2>
+            <% current_user.requests.each do | request | %>
+              <div>
+                <a href="/gifts/<%= request.gift.id %>">
+                  <%= request.gift.title %>
+                </a>
+              </div>
+            <% end %>      
+
+    </div>
 </div>
