@@ -28,6 +28,11 @@ gem 'handlebars-rails', '~> 0.4.2'
 # Knockout JS framework gem
 gem 'knockoutjs-rails', '~> 3.2.0'
 
+#Rspec-rails for testing
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
