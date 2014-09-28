@@ -1,4 +1,4 @@
 class Request < ActiveRecord::Base
-  belongs_to :user_id
-  belongs_to :gift_id
+  belongs_to :user
+  belongs_to :gift
 end

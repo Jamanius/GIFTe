@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
     has_many :gifts
+    has_many :requests
 
   	def full_name 
     	first_name + " " + last_name
