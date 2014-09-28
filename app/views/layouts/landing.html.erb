@@ -28,6 +28,7 @@
               <%= link_to "logout", destroy_user_session_path, method: :delete %>  
             </li>
           <% else %> 
+            <li><%= link_to "About", "#about" %></li> 
             <li><%= link_to "login", new_user_session_path %></li>
           <% end %>
         </li>
@@ -37,6 +38,10 @@
 
   <div class="container">
     <%= yield %>   
+  </div>
+
+  <div id="about">
+    <h2>About Us</h2>
   </div>
 </body>
 </html>

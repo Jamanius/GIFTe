@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get '/:id', to: 'profiles#show'
 
+  get 'gifts/:id/request_gift' => 'gifts#request_gift', as: :request_gift
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

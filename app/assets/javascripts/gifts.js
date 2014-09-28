@@ -1,13 +1,12 @@
 //LK wait for the doc to know about knockout
 $( document ).ready(function() {
-  prepareKOGiftPage();
+    prepareKOGiftPage();
 });
 
 function prepareKOGiftPage(){
-  ko.applyBindings(new GiftListViewModel());
+    ko.applyBindings(new GiftListViewModel());
     slideHide();
     $(".pane").hide();
-
 };
 
 //LK dummyData
@@ -25,23 +24,23 @@ function GiftListViewModel() {
     self.filter = ko.observable("");
 
 
-//operations
+    //operations
     self.gifts(DataRetrieve());
     self.CategoryChoice = ko.observable(true);
     self.giftCategory = ko.observable();
 
-self.filteredgifts = ko.computed(function() {
-    var filter = self.filter().toLowerCase();
-    if (!filter) {
-        return self.gifts();
-    } else {
-        return ko.utils.arrayFilter(self.gifts(), function(item) {
-            if (item.title.toLowerCase().indexOf(filter) === 0) {
-                return item;
-            };
-        });
-    }
-}, GiftListViewModel);
+    self.filteredgifts = ko.computed(function() {
+        var filter = self.filter().toLowerCase();
+        if (!filter) {
+            return self.gifts();
+        } else {
+            return ko.utils.arrayFilter(self.gifts(), function(item) {
+                if (item.title.toLowerCase().indexOf(filter) === 0) {
+                    return item;
+                };
+            });
+        }
+    }, GiftListViewModel);
 };
 
 
@@ -70,8 +69,8 @@ function categoryFilter(){
 
 
 //LK not used currently, awaiting a server call
-function DataRetrieve (callback){
-    $.getJSON("http://gifte.herokuapp.com/gifts.json", function(data){callback(data)});
+function DataRetrieve (callback) {
+    $.getJSON("/gifts.json", function(data){ callback(data) });
     var mappedTasks = $.map(callback, function(item) { return new Gift(item) });
     return mappedTasks;
 };

@@ -80,6 +80,26 @@ class GiftsController < ApplicationController
     end
   end
 
+  # api endpoint for new request
+  # post "/gifts/:id/request" do
+  def request_gift
+    # find the gift by its ID
+    @gift = Gift.find(params[:id])
+    # create a new request object that's set to current user and current gift
+    @request = Request.new
+    @request.user = current_user
+    @request.gift = @gift
+    # save this request & return json object containing the new request
+    if @request.save
+      respond_to do |format|
+        format.html { redirect_to gift_path(@gift), notice: "Your request has been received."}
+        format.json { render request: @request}
+      end
+    else
+      status 400
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gift
