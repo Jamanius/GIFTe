@@ -20,7 +20,8 @@
 </p>
 
 <p>
-  <strong>Listed By: <%= link_to @gift.user.profile_name%> </strong>
+  <strong>Listed By: <%= link_to @gift.user.profile_name, profile_path(@gift.user) %> </strong>
+   
   
 </p>
 
