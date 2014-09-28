@@ -7,7 +7,7 @@
       <a href="/gifts/<%= gift.id %>">
         <strong><%= gift.title %></strong>
       </a>
-      <span>  ---</span><em><%= gift.description %></em><br>
+      <span>&nbsp</span><em><%= gift.description %></em><br>
       
       <div><%= link_to gift.user.profile_name, profile_path(gift.user) %> |  <%= time_ago_in_words(gift.created_at) + " ago" %>
       <a class="btn btn-inf pull-right" href="#" role="button">Enquire »</a>
