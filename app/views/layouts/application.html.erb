@@ -21,6 +21,14 @@
   <div class="container">
     <div class="jumbotron">
       <div class="inner-container">
+
+        <% if notice %>
+          <p class="notice alert alert-info"><%= notice %></p> <!-- devise configurations  -->
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p> <!-- devise configurations  -->
+        <% end %>
+
         <!-- <p class="notice"><%= notice %></p> --> <!-- devise configurations  -->
         <!-- <p class="alert"><%= alert %></p>  --><!-- devise configurations  -->
       
