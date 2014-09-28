@@ -71,7 +71,7 @@ function categoryFilter(){
 
 //LK not used currently, awaiting a server call
 function DataRetrieve (callback){
-$.getJSON("http://gifte.herokuapp.com/gifts.json", function(data){callback(data)});
-var mappedTasks = $.map(callback, function(item) { return new Gift(item) });
-return mappedTasks;
+    $.getJSON("http://gifte.herokuapp.com/gifts.json", function(data){callback(data)});
+    var mappedTasks = $.map(callback, function(item) { return new Gift(item) });
+    return mappedTasks;
 };
