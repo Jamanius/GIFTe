@@ -1,20 +1,12 @@
-<h1>Dashboard#requested</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<h1>Dashboard</h1>
 
-<ul class="nav nav-pills">
-  <li><%= link_to "Stuff I'm giving away", dashboard_listed_path %></li>
-  <li class="active"><%= link_to "Stuff I've asked for", dashboard_requested_path %></li>
-  <li><a href="#">Messages</a></li>
-</ul>
-
-<br>
 <div class="container-inner">
 
   <!-- tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#my-gifts" role="tab" data-toggle="tab">My Gifts</a></li>
     <li><a href="#my-requests" role="tab" data-toggle="tab">My Requests</a></li>
-    <li>a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li><a href="#my-requests" role="tab" data-toggle="tab">Profile</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -22,18 +14,24 @@
     <div class="tab-pane active" id="my-gifts">
       <br>
       <% current_user.gifts.each do | gift| %>
-        <div>
-          <a href="/gifts/<%= gift.id %>/edit">
-            <%= gift.title %>
-          </a>
-        </div>
-      <% end %>
+        <div class="row">
+          <div class="col-xs-2 ">
+            <a href="/gifts/<%= gift.id %>">
+              <%= gift.title %>
+            </a>
+          </div>
+          <div class="col-xs-10 ">
+            <em><%= gift.description %></em>
+          </div>      
+        </div>  
+        <br>    
+      <% end %>   
 
-    </div>
+    </div>      
+  
 
-    <div class="tab-pane" id="my-requests">
-      
-      <h2>My Requests</h2>
+    <div class="tab-pane" id="my-requests">  
+      <br>
             <% current_user.requests.each do | request | %>
               <div>
                 <a href="/gifts/<%= request.gift.id %>">

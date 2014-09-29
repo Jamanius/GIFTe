@@ -3,13 +3,16 @@ Rails.application.routes.draw do
 
   get 'dashboard/listed'
   get 'dashboard/requested'
+  get 'dashboard', to: 'dashboard#index', as: 'dashboard'
 
   devise_for :users
   resources :gifts
   root 'landing#index'
 
-  get '/:id', to: 'profiles#show'
-
+  # get '/:id', to: 'profiles#show', as: 'profile' 
+  
+  get 'profiles/:id', to: 'profiles#show', as: 'profile' 
+  
   get 'gifts/:id/request_gift' => 'gifts#request_gift', as: :request_gift
 
   # Jaz JS learning objectives:

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>GIFTeconomy</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 
@@ -10,11 +10,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
   <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+  
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= yield :head %>
 
 </head>
@@ -25,10 +26,18 @@
       <div class="inner-container">
 
         <% if notice %>
-          <p class="notice alert alert-info"><%= notice %></p> <!-- devise configurations  -->
+          <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <%= notice %>
+          </div>
+          
+          <!-- devise configurations  -->
         <% end %>
         <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p> <!-- devise configurations  -->
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <%= alert %>
+          </div>
         <% end %>
 
         <!-- <p class="notice"><%= notice %></p> --> <!-- devise configurations  -->

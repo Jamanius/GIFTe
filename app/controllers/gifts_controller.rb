@@ -4,7 +4,7 @@ class GiftsController < ApplicationController
   # GET /gifts
   # GET /gifts.json
   def index
-    @gifts = Gift.all
+    @gifts = Gift.order('created_at DESC').all
     # @gift = Gift.new
     # @user = User.new
 
@@ -75,7 +75,7 @@ class GiftsController < ApplicationController
   def destroy
     @gift.destroy
     respond_to do |format|
-      format.html { redirect_to gifts_url, notice: 'Gift was successfully destroyed.' }
+      format.html { redirect_to gifts_url, notice: 'Gift was successfully removed.' }
       format.json { head :no_content }
     end
   end
