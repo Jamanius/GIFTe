@@ -4,6 +4,7 @@ class GiftsController < ApplicationController
   # GET /gifts
   # GET /gifts.json
   def index
+    return redirect_to root_url unless current_user
     @gifts = Gift.order('created_at DESC').all
     @gift = Gift.new
     # @user = User.new
@@ -19,6 +20,7 @@ class GiftsController < ApplicationController
   # GET /gifts/1
   # GET /gifts/1.json
   def show
+    @request = Request.new 
     @gift = Gift.find(params[:id])
     respond_to do |format|
       format.html 
@@ -89,6 +91,9 @@ class GiftsController < ApplicationController
     @request = Request.new
     @request.user = current_user
     @request.gift = @gift
+
+    # binding.pry 
+    @request.message = params[:request][:message]
     # save this request & return json object containing the new request
     if @request.save
       respond_to do |format|
