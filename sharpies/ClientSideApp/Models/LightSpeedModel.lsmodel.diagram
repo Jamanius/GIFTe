@@ -22,10 +22,10 @@
         <entityShapeMoniker Id="f8351db5-5cf9-4073-a092-740fe138b513" />
       </nodes>
     </oneToManyAssociationConnector>
-    <entityShape Id="2b59b8fc-9bd3-4ee5-913e-3d9339477e7a" absoluteBounds="6.375, 1.625, 1.5, 1.4715071614583333">
+    <entityShape Id="2b59b8fc-9bd3-4ee5-913e-3d9339477e7a" absoluteBounds="6.75, 1.625, 1.5, 1.8561100260416668">
       <entityMoniker name="/LightSpeedModel/Gift" />
       <nestedChildShapes>
-        <elementListCompartment Id="0fd0fc2c-deb4-44ef-aa63-750f8bfbc424" absoluteBounds="6.39, 2.035, 1.4700000000000002, 0.96150716145833326" name="Properties" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0fd0fc2c-deb4-44ef-aa63-750f8bfbc424" absoluteBounds="6.765, 2.035, 1.4700000000000002, 1.3461100260416665" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
   </nestedChildShapes>

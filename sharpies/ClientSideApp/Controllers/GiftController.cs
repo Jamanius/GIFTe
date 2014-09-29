@@ -34,7 +34,7 @@ namespace ClientSideApp.Controllers
             get { return _lazyContext.Value; }
         }
         // GET: api/Gift
-        public IEnumerable<Customer> Get()
+        public IEnumerable<Gift> Get()
         {
             using (var uow = Context.CreateUnitOfWork())
             {
@@ -43,70 +43,42 @@ namespace ClientSideApp.Controllers
             }
         }
 
-        // PATCH: api/Gift/4
-        public void Patch(int id, Dictionary<String, String> patch)
-        {
-            using (var uow = Context.CreateUnitOfWork())
-            {
-                Customer customer = uow.FindById<Customer>(id);
-                if (customer == null) { return; }
-
-                customer.Patch(patch);
-
-                uow.Attach(customer);
-                uow.SaveChanges();
-            }
-        }
+       
         // GET: api/Gift/5
-        public Customer Get(int id)
+        public Gift Get(int id)
         {
             using (var uow = Context.CreateUnitOfWork())
             {
-                Customer customer = uow.FindById<Customer>(id);
+                Gift customer = uow.FindById<Gift>(id);
                 return customer;
             }
         }
 
         // POST: api/Gift
-        public void Post([FromBody]Customer customer)
+        public void Post([FromBody]Gift gift)
         {
             using (var uow = Context.CreateUnitOfWork())
             {
-                customer.ResetId();
-                uow.Attach(customer, AttachMode.Import);
-                uow.Add(customer);
+                gift.ResetId();
+                uow.Attach(gift, AttachMode.Import);
+                uow.Add(gift);
                 uow.SaveChanges(true);
             }
         }
 
 
-        // LINK: api/Gift
-        [AcceptVerbs("LINK")]
-        public void PostMany([FromBody]List<Customer> customers)
-        {
-            using (var uow = Context.CreateUnitOfWork())
-            {
-                customers.ForEach(customer =>
-                {
-                    customer.ResetId();
-                    uow.Attach(customer, AttachMode.Import);
-                    uow.Add(customer);
-                });
-
-                uow.SaveChanges();
-            }
-        }
+       
 
         // PUT: api/Gift/5
-        public void Put(int id, [FromBody]Customer value)
+        public void Put(int id, [FromBody]Gift value)
         {
             using (var uow = Context.CreateUnitOfWork())
             {
-                Customer customer = uow.FindById<Customer>(id);
+                Gift gift = uow.FindById<Gift>(id);
 
-                customer.CloneValues(value);
+               gift.CloneValues(value);
 
-                uow.Attach(customer);
+                uow.Attach(gift);
                 uow.SaveChanges();
             }
         }
@@ -116,49 +88,49 @@ namespace ClientSideApp.Controllers
         {
             using (var uow = Context.CreateUnitOfWork())
             {
-                Customer customer = uow.FindById<Customer>(id);
-                if (customer == null) return;
+                Gift gift = uow.FindById<Gift>(id);
+                if (gift == null) return;
 
-                uow.Remove(customer);
+                uow.Remove(gift);
                 uow.SaveChanges();
             }
         }
 
         // GET: api/Gift/5/notes
-        [Route("api/customers/{customerId}/notes")]
-        [AcceptVerbs("GET")]
-        public String GetNotesForCustomer(int customerId)
-        {
-            using (var uow = Context.CreateUnitOfWork())
-            {
-                Customer customer = uow.FindById<Customer>(customerId);
-                if (customer == null) { return String.Empty; }
+        //[Route("api/customers/{customerId}/notes")]
+        //[AcceptVerbs("GET")]
+        //public String GetNotesForCustomer(int customerId)
+        //{
+        //    using (var uow = Context.CreateUnitOfWork())
+        //    {
+        //        Customer customer = uow.FindById<Customer>(customerId);
+        //        if (customer == null) { return String.Empty; }
 
-                String template = "<ul class='notes'>{{#each notes}}<li class='note'>{{this}}</li>{{/each}}</ul>";
-                var data = new { createdate = customer.CreatedOn, notes = customer.Notes.OrderByDescending(o => o.CreatedOn).Select(s => s.Text) };
-                var output = Handlebars.Render(template, data);
+        //        String template = "<ul class='notes'>{{#each notes}}<li class='note'>{{this}}</li>{{/each}}</ul>";
+        //        var data = new { createdate = customer.CreatedOn, notes = customer.Notes.OrderByDescending(o => o.CreatedOn).Select(s => s.Text) };
+        //        var output = Handlebars.Render(template, data);
 
-                return output;
-            }
-        }
+        //        return output;
+        //    }
+        //}
 
         // GET: api/Gift/5/notes
-        [Route("api/customers/{customerId}/notes")]
-        [AcceptVerbs("POST")]
-        public void PostNoteForCustomer(int customerId, [FromBody]String text)
-        {
-            using (var uow = Context.CreateUnitOfWork())
-            {
-                Customer customer = uow.FindById<Customer>(customerId);
-                if (customer == null) return;
+        //[Route("api/customers/{customerId}/notes")]
+        //[AcceptVerbs("POST")]
+        //public void PostNoteForCustomer(int customerId, [FromBody]String text)
+        //{
+        //    using (var uow = Context.CreateUnitOfWork())
+        //    {
+        //        Customer customer = uow.FindById<Customer>(customerId);
+        //        if (customer == null) return;
 
-                Note note = new Note() { Text = text };
-                uow.Attach(note, AttachMode.Import);
-                customer.Notes.Add(note);
+        //        Note note = new Note() { Text = text };
+        //        uow.Attach(note, AttachMode.Import);
+        //        customer.Notes.Add(note);
 
-                uow.SaveChanges();
-            }
-        }
+        //        uow.SaveChanges();
+        //    }
+        //}
 
     
     }

@@ -54,35 +54,61 @@ namespace ClientSideApp.Controllers
         }
 
         
-        public ActionResult Generate(int customersToGenerate = 30)
+        public ActionResult Generate(int quantityToGenerate = 30)
         {
 
-            var fake = new Fake<Customer>();
-
+            
             using (var uow = Context.CreateUnitOfWork())
             {
-                customersToGenerate.Times(i =>
-                {
-                    Customer customer = fake.Generate();
-                    customer.Phone_number = Phone.Number();
-                    5.Times(k =>
-                    {
-                        var note = new Note();
-                        note.Text = Lorem.Paragraph();
-                        customer.Notes.Add(note);
-                    });
-                    
-
-                    customer.ResetId();
-
-                    uow.Attach(customer,AttachMode.Import);
-                    uow.Add(customer);
-                });
-                uow.SaveChanges();
+                GenerateCustomers(quantityToGenerate, uow);
+                GenerateGifts(quantityToGenerate, uow);
                 return View();
             }
         }
-       
+
+        private void GenerateCustomers(int customersToGenerate, LightSpeedModelUnitOfWork uow)
+        {
+            var fake = new Fake<Customer>();
+
+            customersToGenerate.Times(i =>
+            {
+                Customer customer = fake.Generate();
+                customer.Phone_number = Phone.Number();
+                5.Times(k =>
+                {
+                    var note = new Note();
+                    note.Text = Lorem.Paragraph();
+                    customer.Notes.Add(note);
+                });
+
+
+                customer.ResetId();
+
+                uow.Attach(customer, AttachMode.Import);
+                uow.Add(customer);
+            });
+            uow.SaveChanges();
+        }
+
+        private void GenerateGifts(int giftsToGenerate, LightSpeedModelUnitOfWork uow)
+        {
+            var fake = new Fake<Gift>();
+
+            giftsToGenerate.Times(i =>
+            {
+               Gift gift = fake.Generate();
+                
+               
+
+                gift.ResetId();
+
+                uow.Attach(gift, AttachMode.Import);
+                uow.Add(gift);
+            });
+            uow.SaveChanges();
+        }
     }
+
+
 #endif
 }

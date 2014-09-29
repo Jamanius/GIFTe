@@ -33,9 +33,6 @@
           <entityMoniker name="/LightSpeedModel/Note" />
         </oneToManyAssociation>
       </oneToManyAssociations>
-      <clrAttributes>
-        <clrAttribute typeName="System.Runtime.Serialization.DataContract" />
-      </clrAttributes>
     </entity>
     <entity name="Note" identityType="Int32" cacheExpiry="0" tableName="Notes" identityMethod="KeyTable" trackCreateTime="true" trackUpdateTime="true" softDelete="true">
       <entityProperties>
@@ -46,13 +43,15 @@
         </entityProperty>
       </entityProperties>
     </entity>
-    <entity name="Gift" identityType="Int32" cacheExpiry="0">
+    <entity name="Gift" identityType="Int32" cacheExpiry="0" identityMethod="KeyTable" trackCreateTime="true" trackUpdateTime="true" softDelete="true">
       <entityProperties>
         <entityProperty name="title" privateSetter="false" />
         <entityProperty name="description" privateSetter="false" />
         <entityProperty name="comments" privateSetter="false" />
         <entityProperty name="gift_type" privateSetter="false" />
         <entityProperty name="location" privateSetter="false" />
+        <entityProperty name="image" privateSetter="false" />
+        <entityProperty name="status" privateSetter="false" />
       </entityProperties>
     </entity>
   </entities>
