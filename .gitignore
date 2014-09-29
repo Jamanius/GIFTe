@@ -14,3 +14,13 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+.DS_Store
+app/.DS_Store
+app/assets/.DS_Store
+app/views/.DS_Store
+app/views/devise/.DS_Store
+config/.DS_Store
+db/.DS_Store
+lib/.DS_Store
+vendor/.DS_Store	

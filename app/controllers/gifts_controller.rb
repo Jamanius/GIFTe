@@ -5,8 +5,8 @@ class GiftsController < ApplicationController
   # GET /gifts.json
   def index
     @gifts = Gift.order('created_at DESC').all
-    @gift = Gift.new
-    
+    # @gift = Gift.new
+    # @user = User.new
 
     # respond_to // still see html page. User goes to /gifts, renders gifts view, then JS will ask server for gifts json 
     respond_to do |format|

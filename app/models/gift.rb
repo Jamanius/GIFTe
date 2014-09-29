@@ -3,6 +3,6 @@ class Gift < ActiveRecord::Base
   validates :description, presence: true
 
 	belongs_to :user
-  has_many :requests
+ 	has_many :requests
 
 end
