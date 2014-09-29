@@ -16,6 +16,7 @@
       <% current_user.gifts.each do | gift| %>
         <div class="row">
           <div class="col-xs-2 ">
+            <!-- should be using link_to helper here -->
             <a href="/gifts/<%= gift.id %>">
               <%= gift.title %>
             </a>

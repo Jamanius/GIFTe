@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  # Minor niggle but try to remove trailing whitespace
   
   def index 
   end 
