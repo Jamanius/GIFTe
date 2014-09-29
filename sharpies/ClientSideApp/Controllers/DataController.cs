@@ -52,6 +52,8 @@ namespace ClientSideApp.Controllers
                 return View();
             }
         }
+
+        
         public ActionResult Generate(int customersToGenerate = 30)
         {
 

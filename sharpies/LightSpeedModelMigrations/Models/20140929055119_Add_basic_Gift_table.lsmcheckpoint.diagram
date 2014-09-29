@@ -14,7 +14,7 @@
         <elementListCompartment Id="a1984f1d-d9f2-438b-ba9d-62cd96e2874f" absoluteBounds="1.0150000000000001, 1.4100000000000001, 1.4700000000000002, 0.19230143229166666" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
-    <oneToManyAssociationConnector edgePoints="[(4.375 : 1.47615071614583); (2.5 : 1.47615071614583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <oneToManyAssociationConnector edgePoints="[(4.375 : 1.47615071614583); (2.5 : 1.47615071614583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <oneToManyAssociationMoniker Id="42322dfe-ba1c-4720-9444-f511b967186d" />
       <relativeChildShapes />
       <nodes>
@@ -22,10 +22,10 @@
         <entityShapeMoniker Id="f8351db5-5cf9-4073-a092-740fe138b513" />
       </nodes>
     </oneToManyAssociationConnector>
-    <entityShape Id="2b59b8fc-9bd3-4ee5-913e-3d9339477e7a" absoluteBounds="6.375, 1.625, 1.5, 0.70230143229166675">
+    <entityShape Id="2b59b8fc-9bd3-4ee5-913e-3d9339477e7a" absoluteBounds="6.375, 1.625, 1.5, 1.2792057291666668">
       <entityMoniker name="/LightSpeedModel/Gift" />
       <nestedChildShapes>
-        <elementListCompartment Id="0fd0fc2c-deb4-44ef-aa63-750f8bfbc424" absoluteBounds="6.39, 2.035, 1.4700000000000002, 0.19230143229166666" name="Properties" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0fd0fc2c-deb4-44ef-aa63-750f8bfbc424" absoluteBounds="6.39, 2.035, 1.4700000000000002, 0.76920572916666663" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
   </nestedChildShapes>

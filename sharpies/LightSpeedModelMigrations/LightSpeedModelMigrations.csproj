@@ -50,6 +50,7 @@
     <Compile Include="20140903052059_UseLSCreatUpdateDate.cs" />
     <Compile Include="20140904080032_IncreasePhoneMaxSize.cs" />
     <Compile Include="20140904082057_RenameUsersToCustomers.cs" />
+    <Compile Include="20140929055119_Add_basic_Gift_table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -68,11 +69,13 @@
     <None Include="Models\20140904080032_IncreasePhoneMaxSize.lsmcheckpoint.diagram" />
     <None Include="Models\20140904082057_RenameUsersToCustomers.lsmcheckpoint" />
     <None Include="Models\20140904082057_RenameUsersToCustomers.lsmcheckpoint.diagram" />
+    <None Include="Models\20140929055119_Add_basic_Gift_table.lsmcheckpoint" />
+    <None Include="Models\20140929055119_Add_basic_Gift_table.lsmcheckpoint.diagram" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MindscapeLightSpeedMigrationTargetConnectionString="Data Source=MNENOSYNE;Initial Catalog=PersonalProject;Integrated Security=True;Pooling=False" MindscapeLightSpeedMigrationTargetType="SqlServer2008" />
+      <UserProperties MindscapeLightSpeedMigrationTargetType="SqlServer2008" MindscapeLightSpeedMigrationTargetConnectionString="Data Source=MNENOSYNE;Initial Catalog=PersonalProject;Integrated Security=True;Pooling=False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

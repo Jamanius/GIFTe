@@ -46,9 +46,12 @@
         </entityProperty>
       </entityProperties>
     </entity>
-    <entity name="Gift" identityType="Int32" cacheExpiry="0">
+    <entity name="Gift" identityType="Int32" cacheExpiry="0" trackCreateTime="true" trackUpdateTime="true" softDelete="true">
       <entityProperties>
         <entityProperty name="title" privateSetter="false" />
+        <entityProperty name="description" privateSetter="false" />
+        <entityProperty name="comments" privateSetter="false" />
+        <entityProperty name="status" privateSetter="false" />
       </entityProperties>
     </entity>
   </entities>

@@ -206,6 +206,40 @@ namespace ClientSideApp.Models
   }
 
 
+  [Serializable]
+  [System.CodeDom.Compiler.GeneratedCode("LightSpeedModelGenerator", "1.0.0.0")]
+  [System.ComponentModel.DataObject]
+  public partial class Gift : Entity<int>
+  {
+    #region Fields
+  
+    private string _title;
+
+    #endregion
+    
+    #region Field attribute and view names
+    
+    /// <summary>Identifies the title entity attribute.</summary>
+    public const string titleField = "title";
+
+
+    #endregion
+    
+    #region Properties
+
+
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string title
+    {
+      get { return Get(ref _title, "title"); }
+      set { Set(ref _title, value, "title"); }
+    }
+
+    #endregion
+  }
+
+
 
 
   /// <summary>
@@ -223,6 +257,11 @@ namespace ClientSideApp.Models
     public System.Linq.IQueryable<Note> Notes
     {
       get { return this.Query<Note>(); }
+    }
+    
+    public System.Linq.IQueryable<Gift> Gifts
+    {
+      get { return this.Query<Gift>(); }
     }
     
   }
