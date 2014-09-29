@@ -267,6 +267,8 @@
     </Content>
     <Content Include="libs\Mindscape.LightSpeed.Web.xml" />
     <Content Include="libs\Mindscape.LightSpeed.xml" />
+    <Content Include="Scripts\APIInteractor.js" />
+    <None Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Models\LightSpeedModel.lsmodel">
@@ -296,7 +298,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Indexx.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
