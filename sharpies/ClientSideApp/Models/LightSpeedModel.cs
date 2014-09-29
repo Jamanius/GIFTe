@@ -214,6 +214,10 @@ namespace ClientSideApp.Models
     #region Fields
   
     private string _title;
+    private string _description;
+    private string _comments;
+    private string _gift_type;
+    private string _location;
 
     #endregion
     
@@ -221,6 +225,14 @@ namespace ClientSideApp.Models
     
     /// <summary>Identifies the title entity attribute.</summary>
     public const string titleField = "title";
+    /// <summary>Identifies the description entity attribute.</summary>
+    public const string descriptionField = "description";
+    /// <summary>Identifies the comments entity attribute.</summary>
+    public const string commentsField = "comments";
+    /// <summary>Identifies the gift_type entity attribute.</summary>
+    public const string gift_typeField = "gift_type";
+    /// <summary>Identifies the location entity attribute.</summary>
+    public const string locationField = "location";
 
 
     #endregion
@@ -234,6 +246,34 @@ namespace ClientSideApp.Models
     {
       get { return Get(ref _title, "title"); }
       set { Set(ref _title, value, "title"); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string description
+    {
+      get { return Get(ref _description, "description"); }
+      set { Set(ref _description, value, "description"); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string comments
+    {
+      get { return Get(ref _comments, "comments"); }
+      set { Set(ref _comments, value, "comments"); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string gift_type
+    {
+      get { return Get(ref _gift_type, "gift_type"); }
+      set { Set(ref _gift_type, value, "gift_type"); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public string location
+    {
+      get { return Get(ref _location, "location"); }
+      set { Set(ref _location, value, "location"); }
     }
 
     #endregion
