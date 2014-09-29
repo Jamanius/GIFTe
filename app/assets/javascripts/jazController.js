@@ -18,7 +18,9 @@ Controller.prototype = {
         url: "/gifts.json",
         type: "GET",
         //'for' loop extracts gift data from the JSON & creates gift objects
+        // consider moving this anonymous function into a named function
         success: function(data) {
+          // don't commit debugging statements
           console.log(data);
           self.gifts = [];
           for (var i=0; i<data.length; i++) {
@@ -61,6 +63,8 @@ Controller.prototype = {
     // send the html from the template to the view
     this.view.showGiftDetails(html);
 
+    // don't commit commented out code
+    // use git and Github to refer to old code instead.
     // bind events for the save and delete buttons
     // $(this.view.saveButtonSelector).on("click", this.updateGiftDetails.bind(this));
     // $(this.view.deleteButtonSelector).on("click", this.deleteGift.bind(this));
