@@ -4,9 +4,9 @@ class GiftsController < ApplicationController
   # GET /gifts
   # GET /gifts.json
   def index
-    @gifts = Gift.all 
+    @gifts = Gift.order('created_at DESC').all
     @gift = Gift.new
-    @user = User.new
+    
 
     # respond_to // still see html page. User goes to /gifts, renders gifts view, then JS will ask server for gifts json 
     respond_to do |format|
@@ -75,7 +75,7 @@ class GiftsController < ApplicationController
   def destroy
     @gift.destroy
     respond_to do |format|
-      format.html { redirect_to gifts_url, notice: 'Gift was successfully destroyed.' }
+      format.html { redirect_to gifts_url, notice: 'Gift was successfully removed.' }
       format.json { head :no_content }
     end
   end

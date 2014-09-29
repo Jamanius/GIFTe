@@ -6,11 +6,26 @@ body {
   padding-top: 70px;
 }
 
+body{
+  font-family: Raleway, Arial, sans-serif;
+    font-size:16px;
+    font-weight:300;
+    color:#6d6d6d;
+    overflow-x:hidden;
+}
+
+em {
+  font-size: 12px;
+}
+
+.well {
+  background-color: white;
+}
 .container-inner {
   background: white;
-  padding: 20px 10px;
+  padding: 20px;
   border-radius:10px;
-
+  min-height: 400px; 
 }
 
 .container-inner p {
@@ -22,6 +37,8 @@ body {
   border-style: dotted;
   margin: 18px 0;
 }
+
+
 
 // target element with class status and hover.
 // Class admin displayed inline (meaning that it should actually be displayed)
