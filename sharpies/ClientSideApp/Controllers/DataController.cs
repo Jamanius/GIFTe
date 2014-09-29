@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ClientSideApp.Models;
+using ClientSideApp.Plumbing;
 using dotNetExt;
 using Faker;
 using Mindscape.LightSpeed;
@@ -17,15 +19,11 @@ namespace ClientSideApp.Controllers
     public class DataController : Controller
     {
 
-        private readonly Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>> _lazyContext = new Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>>(
-         () => new LightSpeedContext<LightSpeedModelUnitOfWork>
-         {
-             ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,
-             IdentityMethod = IdentityMethod.IdentityColumn,
-             AutoTimestampMode = AutoTimestampMode.Utc,
-             QuoteIdentifiers = true,
-             Logger = new TraceLogger()
-         });
+        private readonly Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>> _lazyContext = new Lazy
+            <LightSpeedContext<LightSpeedModelUnitOfWork>>(
+            LightSpeedHelper.GetLightSpeedContext);
+
+        
 
         public LightSpeedContext<LightSpeedModelUnitOfWork> Context
         {
@@ -51,6 +49,13 @@ namespace ClientSideApp.Controllers
                 uow.SaveChanges();
                 return View();
             }
+        }
+        public ActionResult ReIndex()
+        {
+            Context.SearchEngine.Rebuild(IsolationLevel.ReadCommitted,
+             typeof(Gift));
+
+            return View();
         }
 
         

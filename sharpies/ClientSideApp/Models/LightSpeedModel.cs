@@ -226,6 +226,7 @@ namespace ClientSideApp.Models
     #region Fields
   
     private string _title;
+    [Indexed]
     private string _description;
     private string _comments;
     private string _gift_type;

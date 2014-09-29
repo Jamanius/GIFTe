@@ -10,9 +10,11 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using ClientSideApp.Models;
+using ClientSideApp.Plumbing;
 using Mindscape.LightSpeed;
 using Mindscape.LightSpeed.Linq;
 using Mindscape.LightSpeed.Logging;
+using Mindscape.LightSpeed.Search;
 using NHandlebars;
 
 namespace ClientSideApp.Controllers
@@ -20,14 +22,9 @@ namespace ClientSideApp.Controllers
     public class GiftController : ApiController
     {
         private readonly Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>> _lazyContext = new Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>>(
-           () => new LightSpeedContext<LightSpeedModelUnitOfWork>
-           {
-               ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,
-               IdentityMethod = IdentityMethod.IdentityColumn,
-               AutoTimestampMode = AutoTimestampMode.Utc,
-               QuoteIdentifiers = true,
-               Logger = new TraceLogger()
-           });
+           LightSpeedHelper.GetLightSpeedContext);
+
+        
 
         public LightSpeedContext<LightSpeedModelUnitOfWork> Context
         {

@@ -48,6 +48,12 @@
     <Reference Include="Faker.NET4">
       <HintPath>..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mindscape.LightSpeed, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -232,6 +238,7 @@
       <DependentUpon>LightSpeedModel.lsmodel</DependentUpon>
     </Compile>
     <Compile Include="Plumbing\LightspeedExtensionMethods.cs" />
+    <Compile Include="Plumbing\LightSpeedHelper.cs" />
     <Compile Include="Plumbing\LightspeedStartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -271,6 +278,7 @@
     <Content Include="libs\Mindscape.LightSpeed.Web.xml" />
     <Content Include="libs\Mindscape.LightSpeed.xml" />
     <Content Include="Scripts\APIInteractor.js" />
+    <Content Include="Views\Data\ReIndex.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
