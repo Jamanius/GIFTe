@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.1.0.0" name="LightSpeedModel" targetNamespace="ClientSideApp.Models" databaseProvider="AmazonSimpleDB" pluralizedInDatabase="false" mediumTrustCompatibility="false" migrationProjectName="LightSpeedModelMigrations\LightSpeedModelMigrations.csproj" xmlns="http://namespaces.mindscape.co.nz/lightspeed" />

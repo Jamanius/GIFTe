@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.1.0.0" name="LightSpeedModel" targetNamespace="ClientSideApp.Models" databaseProvider="SqlServer2008" connectionString="Data Source=MNENOSYNE;Initial Catalog=PersonalProject;Integrated Security=True;Pooling=False" pluralizedInDatabase="false" mediumTrustCompatibility="false" migrationProjectName="LightSpeedModelMigrations\LightSpeedModelMigrations.csproj" xmlns="http://namespaces.mindscape.co.nz/lightspeed">
+  <entities>
+    <entity name="User" identityType="Int32" cacheExpiry="0" tableName="Users" identityMethod="KeyTable" trackCreateTime="true" trackUpdateTime="true" softDelete="true">
+      <entityProperties>
+        <entityProperty name="Name" isNullable="true" privateSetter="false">
+          <validations>
+            <lengthValidation minimumLength="0" maximumLength="50" />
+          </validations>
+          <clrAttributes>
+            <clrAttribute typeName="System.Runtime.Serialization.DataMember" />
+          </clrAttributes>
+        </entityProperty>
+        <entityProperty name="Phone_number" isNullable="true" privateSetter="false">
+          <validations>
+            <lengthValidation minimumLength="0" maximumLength="50" />
+          </validations>
+          <clrAttributes>
+            <clrAttribute typeName="System.Runtime.Serialization.DataMember" />
+          </clrAttributes>
+        </entityProperty>
+        <entityProperty name="Email" isNullable="true" generateDataMemberAttribute="false" privateSetter="false">
+          <validations>
+            <lengthValidation minimumLength="0" maximumLength="300" />
+          </validations>
+          <clrAttributes>
+            <clrAttribute typeName="System.Runtime.Serialization.DataMember" />
+          </clrAttributes>
+        </entityProperty>
+      </entityProperties>
+      <clrAttributes>
+        <clrAttribute typeName="System.Runtime.Serialization.DataContract" />
+      </clrAttributes>
+    </entity>
+  </entities>
+</model>

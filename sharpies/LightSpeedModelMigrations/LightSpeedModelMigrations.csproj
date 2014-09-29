@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{730406E5-A9D4-4031-A1E9-D6BFDE8A6B2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LightSpeedModelMigrations</RootNamespace>
+    <AssemblyName>LightSpeedModelMigrations</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mindscape.LightSpeed.Migrations">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Mindscape\LightSpeed\Migrations\Mindscape.LightSpeed.Migrations.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="20140902093553_Vanila.cs" />
+    <Compile Include="20140902095937_Users.cs" />
+    <Compile Include="20140902230851_RubyStyleUserPropertyNames.cs" />
+    <Compile Include="20140903045950_RemoveManualSoftDelete.cs" />
+    <Compile Include="20140903052059_UseLSCreatUpdateDate.cs" />
+    <Compile Include="20140904080032_IncreasePhoneMaxSize.cs" />
+    <Compile Include="20140904082057_RenameUsersToCustomers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Models\20140902093553_Vanila.lsmcheckpoint" />
+    <None Include="Models\20140902093553_Vanila.lsmcheckpoint.diagram" />
+    <None Include="Models\20140902095937_Users.lsmcheckpoint" />
+    <None Include="Models\20140902095937_Users.lsmcheckpoint.diagram" />
+    <None Include="Models\20140902230851_RubyStyleUserPropertyNames.lsmcheckpoint" />
+    <None Include="Models\20140902230851_RubyStyleUserPropertyNames.lsmcheckpoint.diagram" />
+    <None Include="Models\20140903045950_RemoveManualSoftDelete.lsmcheckpoint" />
+    <None Include="Models\20140903045950_RemoveManualSoftDelete.lsmcheckpoint.diagram" />
+    <None Include="Models\20140903052059_UseLSCreatUpdateDate.lsmcheckpoint" />
+    <None Include="Models\20140903052059_UseLSCreatUpdateDate.lsmcheckpoint.diagram" />
+    <None Include="Models\20140904080032_IncreasePhoneMaxSize.lsmcheckpoint" />
+    <None Include="Models\20140904080032_IncreasePhoneMaxSize.lsmcheckpoint.diagram" />
+    <None Include="Models\20140904082057_RenameUsersToCustomers.lsmcheckpoint" />
+    <None Include="Models\20140904082057_RenameUsersToCustomers.lsmcheckpoint.diagram" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties MindscapeLightSpeedMigrationTargetConnectionString="Data Source=MNENOSYNE;Initial Catalog=PersonalProject;Integrated Security=True;Pooling=False" MindscapeLightSpeedMigrationTargetType="SqlServer2008" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
