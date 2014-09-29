@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using ClientSideApp.Models;
 using Mindscape.LightSpeed;
@@ -16,84 +17,149 @@ using NHandlebars;
 
 namespace ClientSideApp.Controllers
 {
-    public class GiftController : Controller
+    public class GiftController : ApiController
     {
-        // GET: Gift
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private readonly Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>> _lazyContext = new Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>>(
+           () => new LightSpeedContext<LightSpeedModelUnitOfWork>
+           {
+               ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,
+               IdentityMethod = IdentityMethod.IdentityColumn,
+               AutoTimestampMode = AutoTimestampMode.Utc,
+               QuoteIdentifiers = true,
+               Logger = new TraceLogger()
+           });
 
-        // GET: Gift/Details/5
-        public ActionResult Details(int id)
+        public LightSpeedContext<LightSpeedModelUnitOfWork> Context
         {
-            return View();
+            get { return _lazyContext.Value; }
         }
-
-        // GET: Gift/Create
-        public ActionResult Create()
+        // GET: api/Gift
+        public IEnumerable<Customer> Get()
         {
-            return View();
-        }
-
-        // POST: Gift/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            using (var uow = Context.CreateUnitOfWork())
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                List<Gift> gift = uow.Gifts.ToList();
+                return gift;
             }
         }
 
-        // GET: Gift/Edit/5
-        public ActionResult Edit(int id)
+        // PATCH: api/Gift/4
+        public void Patch(int id, Dictionary<String, String> patch)
         {
-            return View();
-        }
-
-        // POST: Gift/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            using (var uow = Context.CreateUnitOfWork())
             {
-                // TODO: Add update logic here
+                Customer customer = uow.FindById<Customer>(id);
+                if (customer == null) { return; }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                customer.Patch(patch);
+
+                uow.Attach(customer);
+                uow.SaveChanges();
             }
         }
-
-        // GET: Gift/Delete/5
-        public ActionResult Delete(int id)
+        // GET: api/Gift/5
+        public Customer Get(int id)
         {
-            return View();
-        }
-
-        // POST: Gift/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            using (var uow = Context.CreateUnitOfWork())
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                Customer customer = uow.FindById<Customer>(id);
+                return customer;
             }
         }
+
+        // POST: api/Gift
+        public void Post([FromBody]Customer customer)
+        {
+            using (var uow = Context.CreateUnitOfWork())
+            {
+                customer.ResetId();
+                uow.Attach(customer, AttachMode.Import);
+                uow.Add(customer);
+                uow.SaveChanges(true);
+            }
+        }
+
+
+        // LINK: api/Gift
+        [AcceptVerbs("LINK")]
+        public void PostMany([FromBody]List<Customer> customers)
+        {
+            using (var uow = Context.CreateUnitOfWork())
+            {
+                customers.ForEach(customer =>
+                {
+                    customer.ResetId();
+                    uow.Attach(customer, AttachMode.Import);
+                    uow.Add(customer);
+                });
+
+                uow.SaveChanges();
+            }
+        }
+
+        // PUT: api/Gift/5
+        public void Put(int id, [FromBody]Customer value)
+        {
+            using (var uow = Context.CreateUnitOfWork())
+            {
+                Customer customer = uow.FindById<Customer>(id);
+
+                customer.CloneValues(value);
+
+                uow.Attach(customer);
+                uow.SaveChanges();
+            }
+        }
+
+        // DELETE: api/Gift/5
+        public void Delete(int id)
+        {
+            using (var uow = Context.CreateUnitOfWork())
+            {
+                Customer customer = uow.FindById<Customer>(id);
+                if (customer == null) return;
+
+                uow.Remove(customer);
+                uow.SaveChanges();
+            }
+        }
+
+        // GET: api/Gift/5/notes
+        [Route("api/customers/{customerId}/notes")]
+        [AcceptVerbs("GET")]
+        public String GetNotesForCustomer(int customerId)
+        {
+            using (var uow = Context.CreateUnitOfWork())
+            {
+                Customer customer = uow.FindById<Customer>(customerId);
+                if (customer == null) { return String.Empty; }
+
+                String template = "<ul class='notes'>{{#each notes}}<li class='note'>{{this}}</li>{{/each}}</ul>";
+                var data = new { createdate = customer.CreatedOn, notes = customer.Notes.OrderByDescending(o => o.CreatedOn).Select(s => s.Text) };
+                var output = Handlebars.Render(template, data);
+
+                return output;
+            }
+        }
+
+        // GET: api/Gift/5/notes
+        [Route("api/customers/{customerId}/notes")]
+        [AcceptVerbs("POST")]
+        public void PostNoteForCustomer(int customerId, [FromBody]String text)
+        {
+            using (var uow = Context.CreateUnitOfWork())
+            {
+                Customer customer = uow.FindById<Customer>(customerId);
+                if (customer == null) return;
+
+                Note note = new Note() { Text = text };
+                uow.Attach(note, AttachMode.Import);
+                customer.Notes.Add(note);
+
+                uow.SaveChanges();
+            }
+        }
+
+    
     }
 }
