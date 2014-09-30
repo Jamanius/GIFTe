@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ClientSideApp.Plumbing;
 
 namespace ClientSideApp
 {
@@ -18,6 +19,8 @@ namespace ClientSideApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            LightspeedStartUp.StartUp();
         }
     }
 }

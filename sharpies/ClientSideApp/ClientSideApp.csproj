@@ -56,6 +56,10 @@
       <HintPath>libs\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="Mindscape.LightSpeed, Version=5.0.2587.0, Culture=neutral, PublicKeyToken=360c8f37b466ebb2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\Mindscape.LightSpeed.dll</HintPath>
@@ -257,6 +261,9 @@
     </Content>
     <Content Include="libs\Lucene.Net.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libs\Microsoft.SqlServer.Types.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="libs\Mindscape.LightSpeed.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

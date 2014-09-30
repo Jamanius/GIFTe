@@ -14,6 +14,7 @@ using ClientSideApp.Plumbing;
 using Mindscape.LightSpeed;
 using Mindscape.LightSpeed.Linq;
 using Mindscape.LightSpeed.Logging;
+using Mindscape.LightSpeed.Querying;
 using Mindscape.LightSpeed.Search;
 using NHandlebars;
 
@@ -31,14 +32,22 @@ namespace ClientSideApp.Controllers
             get { return _lazyContext.Value; }
         }
         // GET: api/Gift
-        public IEnumerable<Gift> Get()
+        public IEnumerable<Gift> Get(string searchQuery, int skip = 0, int take = 30, int distance)
         {
-            using (var uow = Context.CreateUnitOfWork())
+            string cleanQuery = String.Join(" OR ", searchQuery.Split(' '));
+            
+
+            Query query = new Query();
+            query.SearchQuery = cleanQuery;
+            using (var unitOfWork = Context.CreateUnitOfWork())
             {
-                List<Gift> gift = uow.Gifts.ToList();
-                return gift;
+               IEnumerable<Gift> results = unitOfWork.Search(query, typeof(Gift)).Skip(skip).Take(take).Select(s => s.Entity).Cast<Gift>();
+                
+                return results;
             }
         }
+
+        
 
        
         // GET: api/Gift/5
