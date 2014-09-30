@@ -243,6 +243,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LightSpeedModel.lsmodel</DependentUpon>
     </Compile>
+    <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\Mailer.cs" />
     <Compile Include="Plumbing\LightspeedExtensionMethods.cs" />
     <Compile Include="Plumbing\LightSpeedHelper.cs" />

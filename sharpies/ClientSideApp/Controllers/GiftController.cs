@@ -31,12 +31,24 @@ namespace ClientSideApp.Controllers
         {
             get { return _lazyContext.Value; }
         }
+
         // GET: api/Gift
         public IEnumerable<Gift> Get(string searchQuery, int distance =10, int skip = 0, int take = 30)
         {
             
             string cleanQuery = String.Join(" OR ", searchQuery.Split(' '));
+
+            var currentUserLocation = Microsoft.SqlServer.Types.SqlGeography.Point(49.16581d, 37.21061d, 4326);
             
+            using (var uow = Context.CreateUnitOfWork())
+            {
+                IEnumerable<Gift> menaces =
+                    uow.Gifts.Where(w => w.location.STDistance(currentUserLocation).Value < distance).ToList();
+
+                return menaces;
+
+
+            }
 
             //Query query = new Query();
             //query.SearchQuery = cleanQuery;
@@ -48,9 +60,8 @@ namespace ClientSideApp.Controllers
             //}
         }
 
+      
         
-
-       
         // GET: api/Gift/5
         public Gift Get(int id)
         {

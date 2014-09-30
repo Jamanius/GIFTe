@@ -5,7 +5,7 @@ namespace ClientSideApp.Models
 {
     public class Mailer
     {
-        public void Mailer(string address, string subject, string body, int giftId)
+        public void Send(string address, string subject, string body, int giftId)
         {
             MailMessage mail = new MailMessage();
 

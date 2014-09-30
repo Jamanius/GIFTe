@@ -149,25 +149,53 @@ namespace ClientSideApp.Controllers
             }
         }
 
-        // GET: api/Customers/5/notes
-        [Route("api/customers/{customerId}/notes")]
+        //// GET: api/Customers/5/notes
+        //[Route("api/customers/{customerId}/notes")]
+        //[AcceptVerbs("POST")]
+        //public void PostNoteForCustomer(int customerId, [FromBody]String text)
+        //{
+        //    using (var uow = Context.CreateUnitOfWork())
+        //    {
+        //        Customer customer = uow.FindById<Customer>(customerId);
+        //        if (customer == null) return;
+
+        //        Note note = new Note() { Text = text };
+        //        uow.Attach(note, AttachMode.Import);
+        //        customer.Notes.Add(note);
+
+        //        uow.SaveChanges();
+        //    }
+        //}
+
+        //// GET: api/Customers/
+        //[Route("api/customers/{customerId}/notes")]
+        //[AcceptVerbs("POST")]
+        //public void PostNoteForCustomer(int customerId, [FromBody]String text)
+        //{
+        //    using (var uow = Context.CreateUnitOfWork())
+        //    {
+        //        Customer customer = uow.FindById<Customer>(customerId);
+        //        if (customer == null) return;
+
+        //        Note note = new Note() { Text = text };
+        //        uow.Attach(note, AttachMode.Import);
+        //        customer.Notes.Add(note);
+
+        //        uow.SaveChanges();
+        //    }
+        //}
+
+        [Route("api/customers/{customerId}/transactions")]
         [AcceptVerbs("POST")]
-        public void PostNoteForCustomer(int customerId, [FromBody]String text)
+        public void PostTransactionsByCustomer (int customerId, [FromBody]String text)
         {
             using (var uow = Context.CreateUnitOfWork())
             {
                 Customer customer = uow.FindById<Customer>(customerId);
                 if (customer == null) return;
 
-                Note note = new Note() { Text = text };
-                uow.Attach(note, AttachMode.Import);
-                customer.Notes.Add(note);
-
-                uow.SaveChanges();
             }
         }
-
-
 
 
     }
