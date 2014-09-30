@@ -28,6 +28,8 @@ namespace ClientSideApp.Models
             this.gift_type = gift.gift_type;
             this.image = gift.image;
             this.location = gift.location;
+            this.Latitude = gift.Latitude;
+            this.Longitude = gift.Longitude;
             this.status = gift.status;
         }
     }

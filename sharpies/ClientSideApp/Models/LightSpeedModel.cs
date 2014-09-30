@@ -21,6 +21,8 @@ namespace ClientSideApp.Models
     private string _phone_number;
     [ValidateLength(0, 300)]
     private string _email;
+    [ValueField]
+    private Microsoft.SqlServer.Types.SqlGeography _location;
 
     #pragma warning disable 649  // "Field is never assigned to" - LightSpeed assigns these fields internally
     [System.Runtime.Serialization.DataMember]
@@ -41,6 +43,8 @@ namespace ClientSideApp.Models
     public const string Phone_numberField = "Phone_number";
     /// <summary>Identifies the Email entity attribute.</summary>
     public const string EmailField = "Email";
+    /// <summary>Identifies the Location entity attribute.</summary>
+    public const string LocationField = "Location";
     /// <summary>Identifies the CreatedOn entity attribute.</summary>
     public const string CreatedOnField = "CreatedOn";
     /// <summary>Identifies the UpdatedOn entity attribute.</summary>
@@ -55,6 +59,12 @@ namespace ClientSideApp.Models
 
     [ReverseAssociation("Customer")]
     private EntityCollection<Note> _notes = new EntityCollection<Note>();
+    [ReverseAssociation("Customer")]
+    private EntityCollection<Gift> _gifts = new EntityCollection<Gift>();
+    [ReverseAssociation("CustomerFrom")]
+    private EntityCollection<Transaction> _transactionsByCustomerFrom = new EntityCollection<Transaction>();
+    [ReverseAssociation("CustomerTo")]
+    private EntityCollection<Transaction> _transactionsByCustomerTo = new EntityCollection<Transaction>();
 
 
     #endregion
@@ -66,6 +76,27 @@ namespace ClientSideApp.Models
     {
       get { return Get(_notes); }
       set { _notes = value; }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public EntityCollection<Gift> Gifts
+    {
+      get { return Get(_gifts); }
+      set { _gifts = value; }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public EntityCollection<Transaction> TransactionsByCustomerFrom
+    {
+      get { return Get(_transactionsByCustomerFrom); }
+      set { _transactionsByCustomerFrom = value; }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public EntityCollection<Transaction> TransactionsByCustomerTo
+    {
+      get { return Get(_transactionsByCustomerTo); }
+      set { _transactionsByCustomerTo = value; }
     }
 
 
@@ -91,6 +122,14 @@ namespace ClientSideApp.Models
     {
       get { return Get(ref _email, "Email"); }
       set { Set(ref _email, value, "Email"); }
+    }
+
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public Microsoft.SqlServer.Types.SqlGeography Location
+    {
+      get { return Get(ref _location, "Location"); }
+      set { Set(ref _location, value, "Location"); }
     }
     /// <summary>Gets the time the entity was created</summary>
     [System.Diagnostics.DebuggerNonUserCode]
@@ -230,9 +269,13 @@ namespace ClientSideApp.Models
     private string _description;
     private string _comments;
     private string _gift_type;
-    private string _location;
+    [ValueField]
+    private Microsoft.SqlServer.Types.SqlGeography _location;
     private string _image;
     private string _status;
+    private System.Nullable<double> _latitude;
+    private System.Nullable<double> _longitude;
+    private System.Nullable<int> _customerId;
 
     #pragma warning disable 649  // "Field is never assigned to" - LightSpeed assigns these fields internally
     [System.Runtime.Serialization.DataMember]
@@ -261,6 +304,12 @@ namespace ClientSideApp.Models
     public const string imageField = "image";
     /// <summary>Identifies the status entity attribute.</summary>
     public const string statusField = "status";
+    /// <summary>Identifies the Latitude entity attribute.</summary>
+    public const string LatitudeField = "Latitude";
+    /// <summary>Identifies the Longitude entity attribute.</summary>
+    public const string LongitudeField = "Longitude";
+    /// <summary>Identifies the CustomerId entity attribute.</summary>
+    public const string CustomerIdField = "CustomerId";
     /// <summary>Identifies the CreatedOn entity attribute.</summary>
     public const string CreatedOnField = "CreatedOn";
     /// <summary>Identifies the UpdatedOn entity attribute.</summary>
@@ -271,8 +320,31 @@ namespace ClientSideApp.Models
 
     #endregion
     
+    #region Relationships
+
+    [ReverseAssociation("Gift")]
+    private EntityCollection<Transaction> _transactions = new EntityCollection<Transaction>();
+    [ReverseAssociation("Gifts")]
+    private readonly EntityHolder<Customer> _customer = new EntityHolder<Customer>();
+
+
+    #endregion
+    
     #region Properties
 
+    [System.Diagnostics.DebuggerNonUserCode]
+    public EntityCollection<Transaction> Transactions
+    {
+      get { return Get(_transactions); }
+      set { _transactions = value; }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public Customer Customer
+    {
+      get { return Get(_customer); }
+      set { Set(_customer, value); }
+    }
 
 
     [System.Runtime.Serialization.DataMember]
@@ -309,7 +381,7 @@ namespace ClientSideApp.Models
 
     [System.Runtime.Serialization.DataMember]
     [System.Diagnostics.DebuggerNonUserCode]
-    public string location
+    public Microsoft.SqlServer.Types.SqlGeography location
     {
       get { return Get(ref _location, "location"); }
       set { Set(ref _location, value, "location"); }
@@ -330,6 +402,31 @@ namespace ClientSideApp.Models
       get { return Get(ref _status, "status"); }
       set { Set(ref _status, value, "status"); }
     }
+
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public System.Nullable<double> Latitude
+    {
+      get { return Get(ref _latitude, "Latitude"); }
+      set { Set(ref _latitude, value, "Latitude"); }
+    }
+
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public System.Nullable<double> Longitude
+    {
+      get { return Get(ref _longitude, "Longitude"); }
+      set { Set(ref _longitude, value, "Longitude"); }
+    }
+
+    /// <summary>Gets or sets the ID for the <see cref="Customer" /> property.</summary>
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public System.Nullable<int> CustomerId
+    {
+      get { return Get(ref _customerId, "CustomerId"); }
+      set { Set(ref _customerId, value, "CustomerId"); }
+    }
     /// <summary>Gets the time the entity was created</summary>
     [System.Diagnostics.DebuggerNonUserCode]
     public System.DateTime CreatedOn
@@ -349,6 +446,113 @@ namespace ClientSideApp.Models
     public System.Nullable<System.DateTime> DeletedOn
     {
       get { return _deletedOn; }   
+    }
+
+    #endregion
+  }
+
+
+  [Serializable]
+  [System.CodeDom.Compiler.GeneratedCode("LightSpeedModelGenerator", "1.0.0.0")]
+  [System.ComponentModel.DataObject]
+  [System.Runtime.Serialization.DataContract]
+  [Table("Transactions")]
+  public partial class Transaction : Entity<int>
+  {
+    #region Fields
+  
+    private int _status;
+    [Column("CustomerFrom")]
+    private int _customerFromId;
+    [Column("CustomerTo")]
+    private int _customerToId;
+    private int _giftId;
+
+    #endregion
+    
+    #region Field attribute and view names
+    
+    /// <summary>Identifies the Status entity attribute.</summary>
+    public const string StatusField = "Status";
+    /// <summary>Identifies the CustomerFromId entity attribute.</summary>
+    public const string CustomerFromIdField = "CustomerFromId";
+    /// <summary>Identifies the CustomerToId entity attribute.</summary>
+    public const string CustomerToIdField = "CustomerToId";
+    /// <summary>Identifies the GiftId entity attribute.</summary>
+    public const string GiftIdField = "GiftId";
+
+
+    #endregion
+    
+    #region Relationships
+
+    [ReverseAssociation("TransactionsByCustomerFrom")]
+    private readonly EntityHolder<Customer> _customerFrom = new EntityHolder<Customer>();
+    [ReverseAssociation("TransactionsByCustomerTo")]
+    private readonly EntityHolder<Customer> _customerTo = new EntityHolder<Customer>();
+    [ReverseAssociation("Transactions")]
+    private readonly EntityHolder<Gift> _gift = new EntityHolder<Gift>();
+
+
+    #endregion
+    
+    #region Properties
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public Customer CustomerFrom
+    {
+      get { return Get(_customerFrom); }
+      set { Set(_customerFrom, value); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public Customer CustomerTo
+    {
+      get { return Get(_customerTo); }
+      set { Set(_customerTo, value); }
+    }
+
+    [System.Diagnostics.DebuggerNonUserCode]
+    public Gift Gift
+    {
+      get { return Get(_gift); }
+      set { Set(_gift, value); }
+    }
+
+
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public int Status
+    {
+      get { return Get(ref _status, "Status"); }
+      set { Set(ref _status, value, "Status"); }
+    }
+
+    /// <summary>Gets or sets the ID for the <see cref="CustomerFrom" /> property.</summary>
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public int CustomerFromId
+    {
+      get { return Get(ref _customerFromId, "CustomerFromId"); }
+      set { Set(ref _customerFromId, value, "CustomerFromId"); }
+    }
+
+    /// <summary>Gets or sets the ID for the <see cref="CustomerTo" /> property.</summary>
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public int CustomerToId
+    {
+      get { return Get(ref _customerToId, "CustomerToId"); }
+      set { Set(ref _customerToId, value, "CustomerToId"); }
+    }
+
+    /// <summary>Gets or sets the ID for the <see cref="Gift" /> property.</summary>
+    [System.Runtime.Serialization.DataMember]
+    [System.Diagnostics.DebuggerNonUserCode]
+    public int GiftId
+    {
+      get { return Get(ref _giftId, "GiftId"); }
+      set { Set(ref _giftId, value, "GiftId"); }
     }
 
     #endregion
@@ -379,6 +583,11 @@ namespace ClientSideApp.Models
       get { return this.Query<Gift>(); }
     }
     
+    public System.Linq.IQueryable<Transaction> Transactions
+    {
+      get { return this.Query<Transaction>(); }
+    }
+    
   }
 
 #if LS3_DTOS
@@ -401,6 +610,8 @@ namespace ClientSideApp.Models
       public string Phone_number { get; set; }
       [System.Runtime.Serialization.DataMember]
       public string Email { get; set; }
+      [System.Runtime.Serialization.DataMember]
+      public Microsoft.SqlServer.Types.SqlGeography Location { get; set; }
     }
 
     [System.Runtime.Serialization.DataContract(Name="Note")]
@@ -426,11 +637,31 @@ namespace ClientSideApp.Models
       [System.Runtime.Serialization.DataMember]
       public string gift_type { get; set; }
       [System.Runtime.Serialization.DataMember]
-      public string location { get; set; }
+      public Microsoft.SqlServer.Types.SqlGeography location { get; set; }
       [System.Runtime.Serialization.DataMember]
       public string image { get; set; }
       [System.Runtime.Serialization.DataMember]
       public string status { get; set; }
+      [System.Runtime.Serialization.DataMember]
+      public System.Nullable<double> Latitude { get; set; }
+      [System.Runtime.Serialization.DataMember]
+      public System.Nullable<double> Longitude { get; set; }
+      [System.Runtime.Serialization.DataMember]
+      public System.Nullable<int> CustomerId { get; set; }
+    }
+
+    [System.Runtime.Serialization.DataContract(Name="Transaction")]
+    [System.CodeDom.Compiler.GeneratedCode("LightSpeedModelGenerator", "1.0.0.0")]
+    public partial class TransactionDto : LightSpeedModelDtoBase
+    {
+      [System.Runtime.Serialization.DataMember]
+      public int Status { get; set; }
+      [System.Runtime.Serialization.DataMember]
+      public int CustomerFromId { get; set; }
+      [System.Runtime.Serialization.DataMember]
+      public int CustomerToId { get; set; }
+      [System.Runtime.Serialization.DataMember]
+      public int GiftId { get; set; }
     }
 
 
@@ -453,6 +684,7 @@ namespace ClientSideApp.Models
         dto.Name = entity.Name;
         dto.Phone_number = entity.Phone_number;
         dto.Email = entity.Email;
+        dto.Location = entity.Location;
         AfterCopyCustomer(entity, dto);
       }
       
@@ -463,6 +695,7 @@ namespace ClientSideApp.Models
         entity.Name = dto.Name;
         entity.Phone_number = dto.Phone_number;
         entity.Email = dto.Email;
+        entity.Location = dto.Location;
         AfterCopyCustomer(dto, entity);
       }
       
@@ -531,6 +764,9 @@ namespace ClientSideApp.Models
         dto.location = entity.location;
         dto.image = entity.image;
         dto.status = entity.status;
+        dto.Latitude = entity.Latitude;
+        dto.Longitude = entity.Longitude;
+        dto.CustomerId = entity.CustomerId;
         AfterCopyGift(entity, dto);
       }
       
@@ -545,6 +781,9 @@ namespace ClientSideApp.Models
         entity.location = dto.location;
         entity.image = dto.image;
         entity.status = dto.status;
+        entity.Latitude = dto.Latitude;
+        entity.Longitude = dto.Longitude;
+        entity.CustomerId = dto.CustomerId;
         AfterCopyGift(dto, entity);
       }
       
@@ -558,6 +797,46 @@ namespace ClientSideApp.Models
       public static Gift CopyTo(this GiftDto source, Gift entity)
       {
         CopyGift(source, entity);
+        return entity;
+      }
+
+      static partial void BeforeCopyTransaction(Transaction entity, TransactionDto dto);
+      static partial void AfterCopyTransaction(Transaction entity, TransactionDto dto);
+      static partial void BeforeCopyTransaction(TransactionDto dto, Transaction entity);
+      static partial void AfterCopyTransaction(TransactionDto dto, Transaction entity);
+      
+      private static void CopyTransaction(Transaction entity, TransactionDto dto)
+      {
+        BeforeCopyTransaction(entity, dto);
+        CopyLightSpeedModelDtoBase(entity, dto);
+        dto.Status = entity.Status;
+        dto.CustomerFromId = entity.CustomerFromId;
+        dto.CustomerToId = entity.CustomerToId;
+        dto.GiftId = entity.GiftId;
+        AfterCopyTransaction(entity, dto);
+      }
+      
+      private static void CopyTransaction(TransactionDto dto, Transaction entity)
+      {
+        BeforeCopyTransaction(dto, entity);
+        CopyLightSpeedModelDtoBase(dto, entity);
+        entity.Status = dto.Status;
+        entity.CustomerFromId = dto.CustomerFromId;
+        entity.CustomerToId = dto.CustomerToId;
+        entity.GiftId = dto.GiftId;
+        AfterCopyTransaction(dto, entity);
+      }
+      
+      public static TransactionDto AsDto(this Transaction entity)
+      {
+        TransactionDto dto = new TransactionDto();
+        CopyTransaction(entity, dto);
+        return dto;
+      }
+      
+      public static Transaction CopyTo(this TransactionDto source, Transaction entity)
+      {
+        CopyTransaction(source, entity);
         return entity;
       }
 

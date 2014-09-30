@@ -32,19 +32,20 @@ namespace ClientSideApp.Controllers
             get { return _lazyContext.Value; }
         }
         // GET: api/Gift
-        public IEnumerable<Gift> Get(string searchQuery, int skip = 0, int take = 30, int distance)
+        public IEnumerable<Gift> Get(string searchQuery, int distance =10, int skip = 0, int take = 30)
         {
+            
             string cleanQuery = String.Join(" OR ", searchQuery.Split(' '));
             
 
-            Query query = new Query();
-            query.SearchQuery = cleanQuery;
-            using (var unitOfWork = Context.CreateUnitOfWork())
-            {
-               IEnumerable<Gift> results = unitOfWork.Search(query, typeof(Gift)).Skip(skip).Take(take).Select(s => s.Entity).Cast<Gift>();
+            //Query query = new Query();
+            //query.SearchQuery = cleanQuery;
+            //using (var unitOfWork = Context.CreateUnitOfWork())
+            //{
+            //   IEnumerable<Gift> results = unitOfWork.Search(query, typeof(Gift)).Skip(skip).Take(take).Select(s => s.Entity).Cast<Gift>();
                 
-                return results;
-            }
+            //    return results;
+            //}
         }
 
         
@@ -61,11 +62,19 @@ namespace ClientSideApp.Controllers
         }
 
         // POST: api/Gift
-        public void Post([FromBody]Gift gift)
+        public void Post(GiftViewModel present)
         {
+            Gift gift = new Gift()
+            {
+                comments = present.Comments,
+                title = present.Title,
+                gift_type = present.Type,
+                description = present.Description
+
+            };
             using (var uow = Context.CreateUnitOfWork())
             {
-                gift.ResetId();
+                //gift.ResetId();
                 uow.Attach(gift, AttachMode.Import);
                 uow.Add(gift);
                 uow.SaveChanges(true);
