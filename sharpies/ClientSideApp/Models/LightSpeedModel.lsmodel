@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<model xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.1.0.0" name="LightSpeedModel" targetNamespace="ClientSideApp.Models" databaseProvider="SqlServer2008" connectionString="Data Source=JAGUAR\SQLEXPRESS;Initial Catalog=Gifte;Integrated Security=True" pluralizedInDatabase="false" mediumTrustCompatibility="false" migrationProjectName="LightSpeedModelMigrations\LightSpeedModelMigrations.csproj" xmlns="http://namespaces.mindscape.co.nz/lightspeed">
+<model xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.1.0.0" name="LightSpeedModel" targetNamespace="ClientSideApp.Models" databaseProvider="SqlServer2012" connectionString="Data Source=JAGUAR\SQLEXPRESS;Initial Catalog=Gifte;Integrated Security=True" pluralizedInDatabase="false" mediumTrustCompatibility="false" migrationProjectName="LightSpeedModelMigrations\LightSpeedModelMigrations.csproj" xmlns="http://namespaces.mindscape.co.nz/lightspeed">
   <entities>
     <entity name="Customer" identityType="Int32" cacheExpiry="0" tableName="Customers" identityMethod="KeyTable" trackCreateTime="true" trackUpdateTime="true" softDelete="true">
       <entityProperties>
@@ -55,7 +55,7 @@
     </entity>
     <entity name="Gift" identityType="Int32" cacheExpiry="0" identityMethod="KeyTable" trackCreateTime="true" trackUpdateTime="true" softDelete="true">
       <entityProperties>
-        <entityProperty name="title" privateSetter="false" />
+        <entityProperty name="title" indexed="true" privateSetter="false" />
         <entityProperty name="description" indexed="true" privateSetter="false" />
         <entityProperty name="comments" privateSetter="false" />
         <entityProperty name="gift_type" privateSetter="false" />

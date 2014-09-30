@@ -264,6 +264,7 @@ namespace ClientSideApp.Models
   {
     #region Fields
   
+    [Indexed]
     private string _title;
     [Indexed]
     private string _description;

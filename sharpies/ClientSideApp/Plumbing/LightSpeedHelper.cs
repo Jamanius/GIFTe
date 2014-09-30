@@ -30,6 +30,7 @@ namespace ClientSideApp.Plumbing
                 QuoteIdentifiers = true,
                 SearchEngine = new SearchEngineBroker(new LuceneSearchEngine()),
                 SearchEngineFileLocation = path,
+                DataProvider = DataProvider.SqlServer2012,
                 Logger = new TraceLogger()
             };
         }
