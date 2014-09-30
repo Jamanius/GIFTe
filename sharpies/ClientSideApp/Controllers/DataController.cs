@@ -77,20 +77,20 @@ namespace ClientSideApp.Controllers
 
             customersToGenerate.Times(i =>
             {
-                Customer customer = fake.Generate();
-                customer.Phone_number = Phone.Number();
-                5.Times(k =>
-                {
-                    var note = new Note();
-                    note.Text = Lorem.Paragraph();
-                    customer.Notes.Add(note);
-                });
+                //Customer customer = fake.Generate();
+                //customer.Phone_number = Phone.Number();
+                //5.Times(k =>
+                //{
+                //    var note = new Note();
+                //    note.Text = Lorem.Paragraph();
+                //    customer.Notes.Add(note);
+                //});
 
 
-                customer.ResetId();
+                //customer.ResetId();
 
-                uow.Attach(customer, AttachMode.Import);
-                uow.Add(customer);
+                //uow.Attach(customer, AttachMode.Import);
+                //uow.Add(customer);
             });
             uow.SaveChanges();
         }

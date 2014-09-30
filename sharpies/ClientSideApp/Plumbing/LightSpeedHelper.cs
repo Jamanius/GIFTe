@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using ClientSideApp.Models;
@@ -14,6 +15,13 @@ namespace ClientSideApp.Plumbing
     {
         public static LightSpeedContext<LightSpeedModelUnitOfWork> GetLightSpeedContext()
         {
+            //create folder  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "/SearchEngine")
+            //if not exists
+
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "/SearchEngine");
+            Directory.CreateDirectory(path);
+
             return new LightSpeedContext<LightSpeedModelUnitOfWork>
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,
@@ -21,7 +29,7 @@ namespace ClientSideApp.Plumbing
                 AutoTimestampMode = AutoTimestampMode.Utc,
                 QuoteIdentifiers = true,
                 SearchEngine = new SearchEngineBroker(new LuceneSearchEngine()),
-                SearchEngineFileLocation = @"c:\temp\searchEngine",
+                SearchEngineFileLocation = path,
                 Logger = new TraceLogger()
             };
         }
