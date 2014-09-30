@@ -28,7 +28,15 @@ function initialize() {
 function fillInAddress() {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
-    console.log(place.geometry.location.k);
+
+    $.ajax({
+        url: "/",
+        type: "POST",
+        data: place.geometry
+    })
+
+ 
+
     for (var component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
