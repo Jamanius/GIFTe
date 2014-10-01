@@ -43,8 +43,8 @@ namespace ClientSideApp.Controllers
             
             using (var uow = Context.CreateUnitOfWork())
             {
-                IEnumerable<int> nearByGifts =
-                    uow.Gifts.Where(w => w.location.STDistance(currentUserLocation).Value < distance).Select(s => s.Id).ToList();
+                IEnumerable<Gift> nearByGifts =
+                    uow.Gifts.Where(w => w.location.STDistance(currentUserLocation).Value < distance).ToList();
 
                Query query = new Query();
                 query.SearchQuery = cleanQuery;
