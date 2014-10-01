@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   get 'profiles/:id', to: 'profiles#show', as: 'profile' 
   
-  get 'gifts/:id/request_gift' => 'gifts#request_gift', as: :request_gift
+  post 'gifts/:id/request_gift' => 'gifts#request_gift', as: :request_gift
 
   # Jaz JS learning objectives:
   get 'gifts/:id/jaz', to: 'gifts#jaz'
