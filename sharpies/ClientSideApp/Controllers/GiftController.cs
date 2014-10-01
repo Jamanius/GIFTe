@@ -38,23 +38,24 @@ namespace ClientSideApp.Controllers
         // GET: api/Gift
         public IEnumerable<Gift> Get(string searchQuery, double distance =500.0, int skip = 0, int take = 30)
         {
-            
-            string cleanQuery = String.Join(" OR ", searchQuery.Split(' '));
+            // string cleanQuery = String.Join(" OR ", searchQuery.Split(' '));
 
             var currentUserLocation = Microsoft.SqlServer.Types.SqlGeography.Point(49.16591d, 37.21061d, 4326);
             
             using (var uow = Context.CreateUnitOfWork())
             {
                 IEnumerable<Gift> nearByGifts =
-                    uow.Gifts.Where(w => w.location.STDistance(currentUserLocation).Value < distance).ToList();
+                    uow.Gifts.Where(w => w.location.STDistance(currentUserLocation).Value < distance)
+                    .Where(w => w.title.Contains(searchQuery)) //ask mike to help with this
+                    .ToList();
+                // return nearByGifts;
 
                Query query = new Query();
-                query.SearchQuery = cleanQuery;
-                query.QueryExpression = Entity.Attribute("Id").In(nearByGifts.ToArray());
-                IEnumerable<Gift> results = uow.Search(query, typeof(Gift)).Skip(skip).Take(take).Select(s => s.Entity).Cast<Gift>();
+               query.SearchQuery = searchQuery;
+               query.QueryExpression = Entity.Attribute("Id").In(nearByGifts.ToArray());
+               IEnumerable<Gift> results = uow.Search(query, typeof(Gift)).Skip(skip).Take(take).Select(s => s.Entity).Cast<Gift>();
            
-                return results;
-            
+               return results;
             }
 
             //Query query = new Query();
