@@ -33,9 +33,6 @@
         <oneToManyAssociation Id="42322dfe-ba1c-4720-9444-f511b967186d" collectionName="Notes" backreferenceName="Customer" isNullable="false">
           <entityMoniker name="/LightSpeedModel/Note" />
         </oneToManyAssociation>
-        <oneToManyAssociation Id="59a06a18-d196-43e6-843c-afa1c71f7f54" collectionName="Gifts" backreferenceName="Customer" isNullable="true">
-          <entityMoniker name="/LightSpeedModel/Gift" />
-        </oneToManyAssociation>
         <oneToManyAssociation Id="5665e209-b0ab-4db2-9373-90710e6db028" collectionName="TransactionsByCustomerFrom" backreferenceName="CustomerFrom" isNullable="false" columnName="CustomerFrom">
           <entityMoniker name="/LightSpeedModel/Transaction" />
         </oneToManyAssociation>
@@ -59,17 +56,13 @@
         <entityProperty name="description" indexed="true" privateSetter="false" />
         <entityProperty name="comments" privateSetter="false" />
         <entityProperty name="gift_type" privateSetter="false" />
-        <entityProperty name="location" dataType="SqlGeography" isNullable="true" privateSetter="false" />
+        <entityProperty name="location" dataType="SqlGeography" isNullable="true" generateDataMemberAttribute="false" privateSetter="false" />
         <entityProperty name="image" privateSetter="false" />
         <entityProperty name="status" privateSetter="false" />
         <entityProperty name="Latitude" dataType="Double" isNullable="true" privateSetter="false" />
         <entityProperty name="Longitude" dataType="Double" isNullable="true" privateSetter="false" />
+        <entityProperty name="userId" privateSetter="false" />
       </entityProperties>
-      <oneToManyAssociations>
-        <oneToManyAssociation Id="daf540c5-c52a-44a6-a2a5-f9af0fe9c7f1" collectionName="Transactions" backreferenceName="Gift" isNullable="false">
-          <entityMoniker name="/LightSpeedModel/Transaction" />
-        </oneToManyAssociation>
-      </oneToManyAssociations>
     </entity>
     <entity name="Transaction" identityType="Int32" cacheExpiry="0" tableName="Transactions">
       <entityProperties>
