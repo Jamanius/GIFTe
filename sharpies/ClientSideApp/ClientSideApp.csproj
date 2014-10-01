@@ -254,6 +254,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\locationFinder.css" />
     <Content Include="Content\Notes.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -294,8 +295,10 @@
     </Content>
     <Content Include="libs\Mindscape.LightSpeed.Web.xml" />
     <Content Include="libs\Mindscape.LightSpeed.xml" />
+    <Content Include="Scripts\addressFinder.js" />
     <Content Include="Scripts\APIInteractor.js" />
     <Content Include="Views\Data\ReIndex.cshtml" />
+    <Content Include="Views\Home\Iso.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -346,6 +349,7 @@
     <Content Include="Views\Data\Purge.cshtml" />
     <Content Include="Views\Data\Index.cshtml" />
     <Content Include="Views\Data\Generate.cshtml" />
+    <Content Include="Views\Home\Straight.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
