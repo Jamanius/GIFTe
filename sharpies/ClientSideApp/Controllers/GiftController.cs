@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using ClientSideApp.Models;
@@ -21,6 +22,7 @@ using NHandlebars;
 
 namespace ClientSideApp.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GiftController : ApiController
     {
         private readonly Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>> _lazyContext = new Lazy<LightSpeedContext<LightSpeedModelUnitOfWork>>(
