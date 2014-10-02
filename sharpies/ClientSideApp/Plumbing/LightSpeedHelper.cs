@@ -13,6 +13,7 @@ using Lucene.Net.Search;
 using Lucene.Net.Store.Azure;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Mindscape.LightSpeed;
 using Mindscape.LightSpeed.Logging;
 using Mindscape.LightSpeed.Search;
@@ -21,33 +22,22 @@ using Version = Lucene.Net.Util.Version;
 namespace ClientSideApp.Plumbing
 {
 
-    public class DarcySearch : ISearchEngine
+    public class AzureLuceneSearch : ISearchEngine
     {
-        private readonly AzureDirectory azureDirectory;
+        private readonly AzureDirectory _azureDirectory;
         private readonly Analyzer _analyzer = new StandardAnalyzer(Version.LUCENE_30);
 
         private IndexWriter _indexWriter;
-        private bool createNewIndex = false;
+        private bool _createNewIndex;
 
-
-
-        public DarcySearch()
+        public AzureLuceneSearch(AzureDirectory azureDirectory)
         {
-
+            _azureDirectory = azureDirectory;
         }
-        public DarcySearch(ISet<String> stopWords)
+        public AzureLuceneSearch(ISet<String> stopWords, AzureDirectory azureDirectory)
         {
-            this._analyzer = (Analyzer)new StandardAnalyzer(Version.LUCENE_30, stopWords);
-        }
-
-        public DarcySearch(AzureDirectory azureDirectory)
-        {
-            this.azureDirectory = azureDirectory;
-        }
-        public DarcySearch(ISet<String> stopWords, AzureDirectory azureDirectory)
-        {
-            this.azureDirectory = azureDirectory;
-            this._analyzer = (Analyzer)new StandardAnalyzer(Version.LUCENE_30, stopWords);
+            _azureDirectory = azureDirectory;
+            _analyzer = new StandardAnalyzer(Version.LUCENE_30, stopWords);
         }
 
 
@@ -55,8 +45,7 @@ namespace ClientSideApp.Plumbing
 
         private IndexWriter GetIndexWriter()
         {
-            Debug.WriteLine("get index writer");
-            IndexWriter indexWriter = new IndexWriter(this.azureDirectory, this._analyzer, createNewIndex, IndexWriter.MaxFieldLength.UNLIMITED);
+            IndexWriter indexWriter = new IndexWriter(_azureDirectory, _analyzer, _createNewIndex, IndexWriter.MaxFieldLength.UNLIMITED);
             //indexWriter.MergeFactor = 10;
             //indexWriter.MaxMergeDocs = 10;
             
@@ -66,97 +55,71 @@ namespace ClientSideApp.Plumbing
 
         public void Add(IndexKey indexKey, string data)
         {
-            Debug.WriteLine("Add");
+            
             //Invariant.ArgumentNotNull((object) indexKey, "indexKey");
             //Invariant.ArgumentNotNull((object) data, "data");
             Document doc = new Document();
             doc.Add(new Field("key", indexKey.Key, Field.Store.YES, Field.Index.NOT_ANALYZED, Field.TermVector.NO));
             doc.Add(new Field("scope", indexKey.Scope, Field.Store.YES, Field.Index.NOT_ANALYZED, Field.TermVector.NO));
             doc.Add(new Field("id", indexKey.EntityId, Field.Store.YES, Field.Index.NOT_ANALYZED, Field.TermVector.NO));
-            doc.Add(new Field("data", data, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.NO));
-            if (this._indexWriter != null)
+            doc.Add(new Field("data", data, Field.Store.NO, Field.Index.ANALYZED, Field.TermVector.NO));
+            if (_indexWriter != null)
             {
-                this._indexWriter.AddDocument(doc, this._analyzer);
-
+                _indexWriter.AddDocument(doc, _analyzer);
             }
             else
             {
-                using (IndexWriter indexWriter = this.GetIndexWriter())
+                using (IndexWriter indexWriter = GetIndexWriter())
                 {
-                    
-                        indexWriter.AddDocument(doc, this._analyzer);
-                        indexWriter.Commit();
-                    
+                        indexWriter.AddDocument(doc, _analyzer);
                 }
             }
         }
 
         public void BeginBulkAdd()
         {
-            Debug.WriteLine("begin bulk add");
-            this._indexWriter = this.GetIndexWriter();
+           _indexWriter = GetIndexWriter();
         }
 
         public void Clear()
         {
-            Debug.WriteLine("clear");
-
-            createNewIndex = true;
-            var q = this.azureDirectory.ListAll();
-            foreach (var item in q)
+           _createNewIndex = true;
+            var files = _azureDirectory.ListAll();
+            foreach (var file in files)
             {
-                this.azureDirectory.DeleteFile(item);
+                _azureDirectory.DeleteFile(file);
             }
-
         }
 
-        //public LightSpeedContext Context
-        //{
-        //    get
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //    set
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //}
+      
 
         public void EndBulkAdd()
         {
-            Debug.WriteLine("end bulk add");
-            if (this._indexWriter == null)
+            if (_indexWriter == null)
                 return;
-           // this._indexWriter.Commit();
-            this._indexWriter.Dispose();
-            this._indexWriter = (IndexWriter)null;
+           
+            _indexWriter.Dispose();
+            _indexWriter = null;
 
-            createNewIndex = false;
+            _createNewIndex = false;
         }
 
         public void Optimize()
         {
-            Debug.WriteLine("optmize");
-            IndexWriter indexWriter = this.GetIndexWriter();
-            try
+            using (IndexWriter indexWriter = GetIndexWriter())
             {
-                //indexWriter.Optimize();
-            }
-            finally
-            {
-                indexWriter.Dispose();
+                    indexWriter.Optimize();
             }
         }
 
         public void Remove(IndexKey indexKey)
         {
-            Debug.WriteLine("remove");
+            
             //Invariant.ArgumentNotNull((object) indexKey, "indexKey");
 
-            using (IndexReader indexReader = IndexReader.Open(this.azureDirectory, false))
+            using (IndexReader indexReader = IndexReader.Open(_azureDirectory, false))
             {
                 indexReader.DeleteDocuments(new Term("key", indexKey.Key));
-                indexReader.Commit();
             }
 
         }
@@ -167,46 +130,42 @@ namespace ClientSideApp.Plumbing
             //Invariant.ArgumentNotNull((object) scopes, "scopes");
 
 
-            SearchResult[] searchResultArray;
-            using (IndexSearcher indexSearcher = new IndexSearcher(this.azureDirectory))
+            List<SearchResult> searchResultArray = new List<SearchResult>();
+            using (IndexSearcher indexSearcher = new IndexSearcher(_azureDirectory))
             {
-
-
-
-                Query query1 = new QueryParser(Version.LUCENE_30, "data", this._analyzer).Parse(query);
-                QueryWrapperFilter queryFilter = (QueryWrapperFilter)null;
+                Query luceneQuery = new QueryParser(Version.LUCENE_30, "data", _analyzer).Parse(query);
+                QueryWrapperFilter queryFilter = null;
                 if (scopes.Length > 0)
                 {
                     BooleanQuery booleanQuery = new BooleanQuery();
                     foreach (string scope in scopes)
-                        booleanQuery.Add((Query)new TermQuery(new Term("scope", scope)), Occur.SHOULD);
-                    queryFilter = new QueryWrapperFilter((Query)booleanQuery);
+                    {
+                        booleanQuery.Add(new TermQuery(new Term("scope", scope)), Occur.SHOULD);
+                    }
+                    queryFilter = new QueryWrapperFilter(booleanQuery);
                 }
                 TopDocs hits = queryFilter != null
-                    ? indexSearcher.Search(query1, queryFilter, 1)
-                    : ((Searcher)indexSearcher).Search(query1, 1);
-                searchResultArray = new SearchResult[hits.TotalHits];
-                int n = 0;
-                foreach (var hit in hits.ScoreDocs)
-                {
-                    Document doc = indexSearcher.Doc(hit.Doc);
-                    searchResultArray[n] = new SearchResult(doc.GetField("key").StringValue,
-                        doc.GetField("scope").StringValue, doc.GetField("id").StringValue, hit.Score);
-                    n++;
-                }
+                    ? indexSearcher.Search(luceneQuery, queryFilter, 1)
+                    : (indexSearcher).Search(luceneQuery, 1);
 
 
+                searchResultArray.AddRange(
+                    hits.ScoreDocs.Select(hit => new {hit, doc = indexSearcher.Doc(hit.Doc)})
+                        .Select(
+                            @t =>
+                                new SearchResult(@t.doc.GetField("key").StringValue,
+                                    @t.doc.GetField("scope").StringValue, @t.doc.GetField("id").StringValue,
+                                    @t.hit.Score)));
             }
-            return (IList<SearchResult>)searchResultArray;
+            return searchResultArray;
         }
 
         public void Update(IndexKey indexKey, string data)
         {
-            Debug.WriteLine("update");
             //Invariant.ArgumentNotNull((object) indexKey, "indexKey");
             //Invariant.ArgumentNotNull((object) data, "data");
-            this.Remove(indexKey);
-            this.Add(indexKey, data);
+            Remove(indexKey);
+            Add(indexKey, data);
         }
     }
 
@@ -218,12 +177,14 @@ namespace ClientSideApp.Plumbing
             //create folder  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "/SearchEngine")
             //if not exists
 
-            CloudStorageAccount cloudStorageAccount = CloudStorageAccount.DevelopmentStorageAccount;
+            CloudStorageAccount cloudStorageAccount;
             CloudStorageAccount.TryParse(CloudConfigurationManager.GetSetting("luceneBlobStorage"), out cloudStorageAccount);
-            AzureDirectory azureDirectory = new AzureDirectory(cloudStorageAccount, "testcatalog");
+            
+
+            AzureDirectory azureDirectory = new AzureDirectory(cloudStorageAccount, "searchindex");
 
 
-            var searcher = new DarcySearch(azureDirectory);
+            var searcher = new AzureLuceneSearch(azureDirectory);
 
             return new LightSpeedContext<LightSpeedModelUnitOfWork>
             {

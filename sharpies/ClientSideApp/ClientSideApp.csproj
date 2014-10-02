@@ -313,7 +313,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\locationFinder.css" />
     <Content Include="Content\Notes.css" />
-    <Content Include="Eula.htm" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
