@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ClientSideApp.Models;
@@ -52,9 +53,14 @@ namespace ClientSideApp.Controllers
         }
         public ActionResult ReIndex()
         {
-            Context.SearchEngine.Rebuild(IsolationLevel.ReadCommitted,
-             typeof(Gift));
 
+            Task task = new Task(() =>
+            {
+                  Context.SearchEngine.Rebuild(IsolationLevel.ReadCommitted,
+             typeof(Gift));
+            });
+          
+            task.Start();
             return View();
         }
 
